@@ -67,6 +67,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.productService.query().subscribe((res: HttpResponse<IProduct[]>) => (this.products = res.body || []));
   }
 
+  trackId(index: number, item: IProduct): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
+  }
+
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();

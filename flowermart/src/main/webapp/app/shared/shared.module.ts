@@ -6,8 +6,10 @@ import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 
+import { JhMaterialModule } from 'app/shared/material.module';
+
 @NgModule({
-  imports: [FlowermartSharedLibsModule],
+  imports: [FlowermartSharedLibsModule, JhMaterialModule],
   declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -17,6 +19,7 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
+    JhMaterialModule,
   ],
 })
 export class FlowermartSharedModule {}
