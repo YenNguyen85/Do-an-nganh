@@ -7,6 +7,13 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "contactInfo": "Contact Info",
+        "newsAndEvent": "News And Event",
+        "customer": "Customer",
+        "product": "Product",
+        "category": "Category",
+        "bill": "Bill",
+        "billItem": "Bill Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -50,6 +50,18 @@ public class CacheConfiguration {
             createCache(cm, vn.yencute.flowermart.domain.User.class.getName() + ".authorities");
             createCache(cm, vn.yencute.flowermart.domain.PersistentToken.class.getName());
             createCache(cm, vn.yencute.flowermart.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, vn.yencute.flowermart.domain.ContactInfo.class.getName());
+            createCache(cm, vn.yencute.flowermart.domain.NewsAndEvent.class.getName());
+            createCache(cm, vn.yencute.flowermart.domain.Customer.class.getName());
+            createCache(cm, vn.yencute.flowermart.domain.Customer.class.getName() + ".bills");
+            createCache(cm, vn.yencute.flowermart.domain.Product.class.getName());
+            createCache(cm, vn.yencute.flowermart.domain.Product.class.getName() + ".billItems");
+            createCache(cm, vn.yencute.flowermart.domain.Product.class.getName() + ".categories");
+            createCache(cm, vn.yencute.flowermart.domain.Category.class.getName());
+            createCache(cm, vn.yencute.flowermart.domain.Category.class.getName() + ".products");
+            createCache(cm, vn.yencute.flowermart.domain.Bill.class.getName());
+            createCache(cm, vn.yencute.flowermart.domain.Bill.class.getName() + ".billItems");
+            createCache(cm, vn.yencute.flowermart.domain.BillItem.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

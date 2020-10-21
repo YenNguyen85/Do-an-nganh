@@ -1,0 +1,83 @@
+enum Gender {
+	MALE, FEMALE, OTHER
+}
+
+entity ContactInfo {
+	email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) 
+    phone String required
+}
+
+entity NewsAndEvent {
+	title String required
+    content TextBlob 
+    time Instant 
+}
+
+entity Customer {
+	firstName String required
+    lastName String required
+    gender Gender required
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) 
+    phone String required
+    addressLine1 String required
+    addressLine2 String
+    city String required
+    country String required
+}
+
+enum Size {
+    NORMAL, SPECIAL
+}
+
+entity Product {
+	name String required
+    description TextBlob
+    price BigDecimal required min(0)
+    size Size required
+    image ImageBlob
+}
+
+entity Category {
+	name String required
+    description TextBlob required
+}
+
+enum OrderStatus {
+    COMPLETED, PENDING, CANCELLED
+}
+
+entity Bill {
+	placedDate Instant required
+    status OrderStatus required
+}
+
+enum BillItemStatus {
+    AVAILABLE, OUT_OF_STOCK
+}
+
+entity BillItem {
+	quantity Integer required min(0)
+    totalPrice BigDecimal required min(0)
+    status BillItemStatus required
+}
+
+relationship OneToOne {
+	Customer to User with jpaDerivedIdentifier
+}
+
+relationship ManyToMany {
+	Product{Category(name)} to Category{product} 
+}
+
+relationship OneToMany {
+	Customer{Bill} to Bill{Customer}
+    Bill{billItem} to BillItem{bill}
+    Product{billItem} to BillItem{product(name)}
+}
+
+
+
+
+
+
+

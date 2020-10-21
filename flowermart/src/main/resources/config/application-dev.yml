@@ -43,8 +43,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/flowermart
-    username: postgres
-    password: postgres
+    username: flowermart
+    password: flowermart
     hikari:
       poolName: Hikari
       auto-commit: false

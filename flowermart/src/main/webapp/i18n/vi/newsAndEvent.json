@@ -1,0 +1,25 @@
+{
+  "flowermartApp": {
+    "newsAndEvent": {
+      "home": {
+        "title": "News And Events",
+        "createLabel": "Thêm mới một News And Event",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật News And Event",
+        "search": "Tìm News And Event",
+        "notFound": "No News And Events found"
+      },
+      "created": "Một News And Event mới được tạo với định danh {{ param }}",
+      "updated": "Một News And Event cập nhật với định danh {{ param }}",
+      "deleted": "Một News And Event đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa News And Event {{ id }}?"
+      },
+      "detail": {
+        "title": "News And Event"
+      },
+      "title": "Title",
+      "content": "Content",
+      "time": "Time"
+    }
+  }
+}

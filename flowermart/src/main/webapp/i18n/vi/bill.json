@@ -1,0 +1,26 @@
+{
+  "flowermartApp": {
+    "bill": {
+      "home": {
+        "title": "Bills",
+        "createLabel": "Thêm mới một Bill",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Bill",
+        "search": "Tìm Bill",
+        "notFound": "No Bills found"
+      },
+      "created": "Một Bill mới được tạo với định danh {{ param }}",
+      "updated": "Một Bill cập nhật với định danh {{ param }}",
+      "deleted": "Một Bill đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Bill {{ id }}?"
+      },
+      "detail": {
+        "title": "Bill"
+      },
+      "placedDate": "Placed Date",
+      "status": "Status",
+      "billItem": "Bill Item",
+      "customer": "Customer"
+    }
+  }
+}
