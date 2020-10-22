@@ -2,8 +2,8 @@
   "flowermartApp": {
     "Size": {
       "null": "",
-      "NORMAL": "NORMAL",
-      "SPECIAL": "SPECIAL"
+      "NORMAL": "Bình thường",
+      "SPECIAL": "Đặc biệt"
     }
   }
 }

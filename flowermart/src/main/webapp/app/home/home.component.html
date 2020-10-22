@@ -29,16 +29,24 @@
 
 <!-- -->
 
-<div class="card" style="width: 18rem;" *ngFor="let product of products ;trackBy: trackId">
-    <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" class="card-img-top" alt="product image">
-    <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.description }}</p>
-        <button type="submit"
+<div class="shadow-sm p-3 mb-5 bg-white">
+    <div class="row justify-content-center">
+        <div class="card m-3" style="width: 20rem;" *ngFor="let product of products ;trackBy: trackId">
+            <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" class="card-img-top" style="height: 16rem;" alt="product image">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text"><span jhiTranslate="flowermartApp.product.price"></span>: {{ product.price }}</p>
+                <button type="submit"
                         [routerLink]="['/product', product.id, 'view']"
                         class="btn btn-info btn-sm">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-        </button>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+<!--  -->
