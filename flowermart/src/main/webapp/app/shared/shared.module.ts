@@ -8,8 +8,10 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 
 import { JhMaterialModule } from 'app/shared/material.module';
 
+import { QuillModule } from 'ngx-quill';
+
 @NgModule({
-  imports: [FlowermartSharedLibsModule, JhMaterialModule],
+  imports: [FlowermartSharedLibsModule, JhMaterialModule, QuillModule.forRoot()],
   declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -20,6 +22,7 @@ import { JhMaterialModule } from 'app/shared/material.module';
     LoginModalComponent,
     HasAnyAuthorityDirective,
     JhMaterialModule,
+    QuillModule,
   ],
 })
 export class FlowermartSharedModule {}
