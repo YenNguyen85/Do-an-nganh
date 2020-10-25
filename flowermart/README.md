@@ -5,3 +5,4 @@ Tài liệu tham khảo:
 - [How to use Quill Editor in Angular Application](https://www.youtube.com/watch?v=f1qQOorMKGo)
 - [Jhipster create new authority](https://www.jhipster.tech/tips/025_tip_create_new_authority.html)
 - [How to open my application Jhipster without authentication](https://stackoverflow.com/questions/42393231/how-to-open-my-application-j-hipster-without-authentication)
+- [Annotation Type EnableWebSecurity](https://docs.spring.io/spring-security/site/docs/4.2.18.RELEASE/apidocs/org/springframework/security/config/annotation/web/configuration/EnableWebSecurity.html)
