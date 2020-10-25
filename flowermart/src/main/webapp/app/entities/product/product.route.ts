@@ -39,7 +39,7 @@ export const productRoute: Routes = [
     path: '',
     component: ProductComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [], // Khỏi đăng nhập vẫn xem được
       pageTitle: 'flowermartApp.product.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const productRoute: Routes = [
       product: ProductResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [], // Khỏi đăng nhập vẫn xem được
       pageTitle: 'flowermartApp.product.home.title',
     },
     canActivate: [UserRouteAccessService],
