@@ -72,6 +72,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     return item.id!;
   }
 
+  search(query: string): void {
+    this.currentSearch = query;
+    this.loadAll();
+  }
+
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
