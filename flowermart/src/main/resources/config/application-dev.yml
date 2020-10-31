@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    vn.yencute.flowermart: DEBUG
+    io.yencute: DEBUG
 
 management:
   health:
@@ -34,7 +34,7 @@ spring:
   devtools:
     restart:
       enabled: true
-      additional-exclude: static/**
+      additional-exclude: static/**,.h2.server.properties
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
   jackson:
@@ -42,14 +42,17 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/flowermart
+    url: jdbc:h2:file:./build/h2db/db/flowermart;DB_CLOSE_DELAY=-1
     username: flowermart
-    password: flowermart
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false
+  h2:
+    console:
+      enabled: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL10Dialect
+    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
     show-sql: true
   data:
     elasticsearch:
@@ -88,13 +91,17 @@ jhipster:
     allowed-origins: '*'
     allowed-methods: '*'
     allowed-headers: '*'
-    exposed-headers: 'Link,X-Total-Count'
+    exposed-headers: 'Authorization,Link,X-Total-Count'
     allow-credentials: true
     max-age: 1800
   security:
-    remember-me:
-      # security key (this key should be unique for your application, and kept secret)
-      key: 80017a400f1a22d653c826b97ab72c9347c3414cc5016352f0f595cbb1aea5af52312e696d9638f0e5d88a4069960d549aa1
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        base64-secret: YTkxNmM2MzA3ZjYzOTgxODk1MGMyMzkwMmFhNWU4OWMwNGE1MjIxMzAzYzVkN2Y0OWNlODQzZDI5MWZiZDVkOWEyZWYxYzZjZTdjYTc2NmYzMGI5OTg3NmI1MmJhZDI4NmU0MjczYzdhMzU1M2FkY2VlMzhkNGZiOWUzYTkwNDQ=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
     base-url: http://127.0.0.1:8080
   metrics:

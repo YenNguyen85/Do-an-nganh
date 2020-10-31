@@ -4,17 +4,11 @@
 put Sass variables here:
 eg $input-color: red;
 ****************************/
-@import '~bootswatch/dist/sketchy/variables';
+@import '~bootswatch/dist/flatly/variables';
 // Override Bootstrap variables
 @import 'bootstrap-variables';
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
-@import '~bootswatch/dist/sketchy/bootswatch';
-
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css';
+@import '~bootswatch/dist/flatly/bootswatch';
 
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */

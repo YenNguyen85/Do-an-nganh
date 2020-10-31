@@ -6,12 +6,8 @@ import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 
-import { JhMaterialModule } from 'app/shared/material.module';
-
-import { QuillModule } from 'ngx-quill';
-
 @NgModule({
-  imports: [FlowermartSharedLibsModule, JhMaterialModule, QuillModule.forRoot()],
+  imports: [FlowermartSharedLibsModule],
   declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -21,8 +17,6 @@ import { QuillModule } from 'ngx-quill';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
-    JhMaterialModule,
-    QuillModule,
   ],
 })
 export class FlowermartSharedModule {}
