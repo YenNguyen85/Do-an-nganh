@@ -62,7 +62,7 @@ entity BillItem {
 }
 
 relationship OneToOne {
-	Customer{user(login)} to User
+	Customer{user(login) required} to User // thêm ràng buộc ngay đây
 }
 
 relationship ManyToMany {
