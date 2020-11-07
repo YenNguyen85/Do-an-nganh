@@ -14,10 +14,7 @@ entity NewsAndEvent {
 }
 
 entity Customer {
-	firstName String required
-    lastName String required
     gender Gender required
-    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) 
     phone String required
     addressLine1 String required
     addressLine2 String
@@ -62,7 +59,7 @@ entity BillItem {
 }
 
 relationship OneToOne {
-	Customer{user(login) required} to User // thêm ràng buộc ngay đây
+	Customer{user(login)} to User // thêm ràng buộc ngay đây
 }
 
 relationship ManyToMany {

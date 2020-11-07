@@ -1,0 +1,26 @@
+{
+  "flowermartApp": {
+    "bill": {
+      "home": {
+        "title": "Bills",
+        "createLabel": "Create a new Bill",
+        "createOrEditLabel": "Create or edit a Bill",
+        "search": "Search for Bill",
+        "notFound": "No Bills found"
+      },
+      "created": "A new Bill is created with identifier {{ param }}",
+      "updated": "A Bill is updated with identifier {{ param }}",
+      "deleted": "A Bill is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bill {{ id }}?"
+      },
+      "detail": {
+        "title": "Bill"
+      },
+      "placedDate": "Placed Date",
+      "status": "Status",
+      "billItem": "Bill Item",
+      "customer": "Customer"
+    }
+  }
+}
