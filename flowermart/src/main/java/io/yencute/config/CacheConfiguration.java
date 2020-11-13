@@ -48,18 +48,6 @@ public class CacheConfiguration {
             createCache(cm, io.yencute.domain.User.class.getName());
             createCache(cm, io.yencute.domain.Authority.class.getName());
             createCache(cm, io.yencute.domain.User.class.getName() + ".authorities");
-            createCache(cm, io.yencute.domain.ContactInfo.class.getName());
-            createCache(cm, io.yencute.domain.NewsAndEvent.class.getName());
-            createCache(cm, io.yencute.domain.Customer.class.getName());
-            createCache(cm, io.yencute.domain.Customer.class.getName() + ".bills");
-            createCache(cm, io.yencute.domain.Product.class.getName());
-            createCache(cm, io.yencute.domain.Product.class.getName() + ".billItems");
-            createCache(cm, io.yencute.domain.Product.class.getName() + ".categories");
-            createCache(cm, io.yencute.domain.Category.class.getName());
-            createCache(cm, io.yencute.domain.Category.class.getName() + ".products");
-            createCache(cm, io.yencute.domain.Bill.class.getName());
-            createCache(cm, io.yencute.domain.Bill.class.getName() + ".billItems");
-            createCache(cm, io.yencute.domain.BillItem.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
