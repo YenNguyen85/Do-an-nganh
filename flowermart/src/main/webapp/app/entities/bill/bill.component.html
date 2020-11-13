@@ -1,0 +1,67 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="flowermartApp.bill.home.title">Bills</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bill" [routerLink]="['/bill/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="flowermartApp.bill.home.createLabel">
+            Create a new Bill
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="bills?.length === 0">
+        <span jhiTranslate="flowermartApp.bill.home.notFound">No bills found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="bills && bills.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.bill.placedDate">Placed Date</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.bill.status">Status</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.bill.user">User</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of bills ;trackBy: trackId">
+                    <td><a [routerLink]="['/bill', bill.id, 'view']">{{ bill.id }}</a></td>
+                    <td>{{ bill.placedDate | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'flowermartApp.OrderStatus.' + bill.status }}">{{ bill.status }}</td>
+                    <td>
+                        {{ bill.user?.email }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/bill', bill.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/bill', bill.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(bill)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
