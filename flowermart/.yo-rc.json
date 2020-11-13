@@ -38,6 +38,9 @@
     "enableTranslation": true,
     "nativeLanguage": "vi",
     "languages": ["vi", "en"],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "flowermart-test",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11"
   }
 }
