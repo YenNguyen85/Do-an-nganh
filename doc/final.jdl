@@ -13,7 +13,7 @@ entity NewsAndEvent {
     time Instant
 }
 
-entity Customer {
+entity InfoCustomer {
     gender Gender required
     phone String required
     addressLine1 String required
@@ -59,7 +59,7 @@ entity BillItem {
 }
 
 relationship OneToOne {
-	Customer{user(login)} to User
+	InfoCustomer{user(login)} to User
 }
 
 relationship ManyToMany {
@@ -67,14 +67,12 @@ relationship ManyToMany {
 }
 
 relationship OneToMany {
-	Customer{Bill} to Bill{Customer}
     Bill{billItem} to BillItem{bill}
     Product{billItem} to BillItem{product(name)}
 }
 
-
-
-
-
+relationship ManyToOne {
+    Bill{user(email)} to User
+}
 
 
