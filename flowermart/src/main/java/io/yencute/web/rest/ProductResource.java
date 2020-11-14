@@ -122,4 +122,9 @@ public class ProductResource {
     public List<Product> getAllProductsOfCategory(@PathVariable Long id){
         return productRepository.findAllByCategories_Id(id);
     }
+
+    @GetMapping("/products/search/{name}")
+    public List<Product> getProductsContaining(@PathVariable String name){
+        return productRepository.findAllByNameContainingIgnoreCase(name);
+    }
 }
