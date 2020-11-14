@@ -37,6 +37,10 @@ export class ProductService {
   }
 
   findByCategoriesId(id: number): Observable<EntityArrayResponseType> {
-    return this.http.get<IProduct[]>(`${this.resourceUrl}/category/${id}`, {observe: 'response'});
+    return this.http.get<IProduct[]>(`${this.resourceUrl}/category/${id}`, { observe: 'response' });
+  }
+
+  findByNameContaining(keyword: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IProduct[]>(`${this.resourceUrl}/search/${keyword}`, { observe: 'response' });
   }
 }
