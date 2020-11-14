@@ -35,4 +35,8 @@ export class ProductService {
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  findByCategoriesId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IProduct[]>(`${this.resourceUrl}/category/${id}`, {observe: 'response'});
+  }
 }

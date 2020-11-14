@@ -1,5 +1,6 @@
 package io.yencute.repository;
 
+import io.yencute.domain.Category;
 import io.yencute.domain.Product;
 
 import org.springframework.data.domain.Page;
@@ -26,4 +27,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select product from Product product left join fetch product.categories where product.id =:id")
     Optional<Product> findOneWithEagerRelationships(@Param("id") Long id);
+
+    List<Product> findAllByCategories_Id(@Param("id") Long id);
 }

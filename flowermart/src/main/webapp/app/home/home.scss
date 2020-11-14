@@ -21,3 +21,26 @@ Main page styles
     background-size: contain;
   }
 }
+
+// Category
+.category-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  background-color: #389e0d;
+  color: white;
+}
+
+.category-content {
+  list-style-type: none;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.8;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.category-content:hover {
+  text-shadow: 2px 2px 4px;
+}

@@ -117,4 +117,9 @@ public class ProductResource {
         productRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/products/category/{id}")
+    public List<Product> getAllProductsOfCategory(@PathVariable Long id){
+        return productRepository.findAllByCategories_Id(id);
+    }
 }
