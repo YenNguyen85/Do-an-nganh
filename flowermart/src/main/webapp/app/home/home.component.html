@@ -1,10 +1,12 @@
 <div class="mt-5">
 
     <div class="row justify-content-center">
-        <form class="form-inline" style="width: 50%;">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="keyword" name="keyword">
-            <button class="btn btn-outline-success my-2 my-sm-0" (click)="loadProductsByKeyword()">Search</button>
-        </form>
+        <div class="col-md-6 mb-4">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="keyword" name="keyword">
+                <button class="btn btn-outline-success my-2 my-sm-0" (click)="loadProductsByKeyword()">Search</button>
+            </form>
+        </div>
     </div>
 
 
@@ -37,8 +39,8 @@
                     <span jhiTranslate="flowermartApp.product.home.notFound">No products found</span>
                 </div>
                 <div class="row" *ngIf="products && products.length > 0">
-                    <div class="card m-3" style="width: 15rem;" *ngFor="let product of products ;trackBy: trackId">
-                        <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" class="card-img-top" style="height: 14rem;" alt="product image">
+                    <div class="card m-3" style="width: 18rem; height: auto;" *ngFor="let product of products ;trackBy: trackId">
+                        <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" class="card-img-top" style="max-width: 100%; height: auto" alt="product image">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text"><span jhiTranslate="flowermartApp.product.price"></span>: {{ product.price }}</p>
@@ -47,6 +49,12 @@
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+                            <button *jhiHasAnyAuthority="'ROLE_USER'"
+                                    type="submit"
+                                    class="btn btn-warning btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="flowermartApp.product.addToCart">Add to cart</span>
                             </button>
                         </div>
                     </div>

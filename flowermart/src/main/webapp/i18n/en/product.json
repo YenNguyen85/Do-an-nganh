@@ -22,7 +22,8 @@
       "size": "Size",
       "image": "Image",
       "billItem": "Bill Item",
-      "category": "Category"
+      "category": "Category",
+      "addToCart": "Add to cart"
     }
   }
 }
