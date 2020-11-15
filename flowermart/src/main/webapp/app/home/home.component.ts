@@ -34,14 +34,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadAllProducts();
   }
 
+  // Tải danh sách tất cả loại
   loadAllCategory(): void {
     this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
   }
 
+  // Tải danh sách tất cả sản phẩm
   loadAllProducts(): void {
     this.productService.query().subscribe((res: HttpResponse<IProduct[]>) => (this.products = res.body || []));
   }
 
+  // tải danh sách sản phẩm thuộc loại được chọn
   loadProducts(category: ICategory): void {
     if (category.id != null) {
       this.productService.findByCategoriesId(category.id).subscribe((res: HttpResponse<IProduct[]>) => (this.products = res.body || []));
@@ -50,9 +53,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * tải danh sách sản phẩm có tên chứa từ khóa
+   * Nếu từ khóa chứa ít hơn 2 kí tự thì không cần tìm
+   */
   loadProductsByKeyword(): void {
-    if (this.keyword != null) {
+    if (this.keyword != null && this.keyword.length >= 2) {
       this.productService.findByNameContaining(this.keyword).subscribe((res: HttpResponse<IProduct[]>) => (this.products = res.body || []));
+    } else {
+      alert('Vui lòng nhập ít nhất 2 kí tự để tìm kiếm');
     }
   }
 
