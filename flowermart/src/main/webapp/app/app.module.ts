@@ -17,6 +17,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 
 // embeded text editor
 import { QuillModule } from 'ngx-quill';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { QuillModule } from 'ngx-quill';
     // embeded text editor module
     QuillModule.forRoot(),
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, CartComponent],
   bootstrap: [MainComponent],
 })
 export class FlowermartAppModule {}

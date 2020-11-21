@@ -16,6 +16,7 @@
         "billItem": "Bill Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
+      "cart" : "Cart",
       "account": {
         "main": "Account",
         "settings": "Settings",

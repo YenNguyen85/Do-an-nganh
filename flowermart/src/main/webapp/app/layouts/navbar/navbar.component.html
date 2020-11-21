@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary fixed-top">
+<nav class="navbar navbar-dark navbar-expand-md bg-primary fixed-top mb-5">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
         <span jhiTranslate="global.title" class="navbar-title">Flowermart</span> <span class="navbar-version">{{ version }}</span>
@@ -70,6 +70,7 @@
                             <span jhiTranslate="global.menu.entities.billItem">Bill Item</span>
                         </a>
                     </li>
+
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
@@ -183,6 +184,15 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <!-- thêm giỏ hàng -->
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/cart" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon [icon]="cart_icon"></fa-icon>
+                        <span jhiTranslate="global.menu.cart">Cart</span>
+                    </span>
+                </a>
             </li>
         </ul>
     </div>
