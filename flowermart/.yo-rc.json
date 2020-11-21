@@ -39,8 +39,8 @@
     "nativeLanguage": "vi",
     "languages": ["vi", "en"],
     "blueprints": [],
-    "herokuAppName": "flowermart-test",
-    "herokuDeployType": "jar",
+    "herokuAppName": "flowermart",
+    "herokuDeployType": "git",
     "herokuJavaVersion": "11"
   }
 }
