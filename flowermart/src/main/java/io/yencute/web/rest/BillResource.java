@@ -81,14 +81,14 @@ public class BillResource {
     }
 
     /**
-     * {@code GET  /bills} : get all the bills.
+     * {@code GET  /bills} : get all the bills of user login
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of bills in body.
      */
     @GetMapping("/bills")
     public List<Bill> getAllBills() {
         log.debug("REST request to get all Bills");
-        return billRepository.findAll();
+        return billRepository.findByUserIsCurrentUser();
     }
 
     /**
