@@ -54,7 +54,6 @@ enum BillItemStatus {
 
 entity BillItem {
 	quantity Integer required min(0)
-    totalPrice BigDecimal required min(0)
     status BillItemStatus required
 }
 
