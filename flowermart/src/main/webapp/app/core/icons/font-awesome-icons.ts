@@ -35,6 +35,7 @@ import {
   // jhipster-needle-add-icon-import
   faHome,
   faShoppingCart,
+  faCartPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
@@ -74,4 +75,5 @@ export const fontAwesomeIcons = [
   // jhipster-needle-add-icon-import
   faAsterisk,
   faShoppingCart,
+  faCartPlus,
 ];

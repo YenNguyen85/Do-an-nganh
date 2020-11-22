@@ -11,6 +11,8 @@ import { ProductService } from 'app/entities/product/product.service';
 import { CategoryService } from 'app/entities/category/category.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
+
 @Component({
   selector: 'jhi-home',
   templateUrl: './home.component.html',
@@ -21,6 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories?: ICategory[];
   eventSubscriber?: Subscription;
   keyword?: string;
+
+  cartPlus_icon = faCartPlus;
 
   constructor(
     private loginModalService: LoginModalService,
