@@ -17,7 +17,6 @@
         "title": "Bill Item"
       },
       "quantity": "Quantity",
-      "totalPrice": "Total Price",
       "status": "Status",
       "bill": "Bill",
       "product": "Product"

@@ -30,7 +30,6 @@ export class BillItemUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   quantityInput = element(by.id('field_quantity'));
-  totalPriceInput = element(by.id('field_totalPrice'));
   statusSelect = element(by.id('field_status'));
 
   billSelect = element(by.id('field_bill'));
@@ -46,14 +45,6 @@ export class BillItemUpdatePage {
 
   async getQuantityInput(): Promise<string> {
     return await this.quantityInput.getAttribute('value');
-  }
-
-  async setTotalPriceInput(totalPrice: string): Promise<void> {
-    await this.totalPriceInput.sendKeys(totalPrice);
-  }
-
-  async getTotalPriceInput(): Promise<string> {
-    return await this.totalPriceInput.getAttribute('value');
   }
 
   async setStatusSelect(status: string): Promise<void> {

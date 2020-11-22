@@ -24,7 +24,6 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.quantity">Quantity</span></th>
-                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.totalPrice">Total Price</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.status">Status</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.product">Product</span></th>
@@ -35,7 +34,6 @@
                 <tr *ngFor="let billItem of billItems ;trackBy: trackId">
                     <td><a [routerLink]="['/bill-item', billItem.id, 'view']">{{ billItem.id }}</a></td>
                     <td>{{ billItem.quantity }}</td>
-                    <td>{{ billItem.totalPrice }}</td>
                     <td jhiTranslate="{{ 'flowermartApp.BillItemStatus.' + billItem.status }}">{{ billItem.status }}</td>
                     <td>
                         <div *ngIf="billItem.bill">

@@ -14,7 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,9 +32,6 @@ public class BillItemResourceIT {
 
     private static final Integer DEFAULT_QUANTITY = 0;
     private static final Integer UPDATED_QUANTITY = 1;
-
-    private static final BigDecimal DEFAULT_TOTAL_PRICE = new BigDecimal(0);
-    private static final BigDecimal UPDATED_TOTAL_PRICE = new BigDecimal(1);
 
     private static final BillItemStatus DEFAULT_STATUS = BillItemStatus.AVAILABLE;
     private static final BillItemStatus UPDATED_STATUS = BillItemStatus.OUT_OF_STOCK;
@@ -60,7 +56,6 @@ public class BillItemResourceIT {
     public static BillItem createEntity(EntityManager em) {
         BillItem billItem = new BillItem()
             .quantity(DEFAULT_QUANTITY)
-            .totalPrice(DEFAULT_TOTAL_PRICE)
             .status(DEFAULT_STATUS);
         return billItem;
     }
@@ -73,7 +68,6 @@ public class BillItemResourceIT {
     public static BillItem createUpdatedEntity(EntityManager em) {
         BillItem billItem = new BillItem()
             .quantity(UPDATED_QUANTITY)
-            .totalPrice(UPDATED_TOTAL_PRICE)
             .status(UPDATED_STATUS);
         return billItem;
     }
@@ -98,7 +92,6 @@ public class BillItemResourceIT {
         assertThat(billItemList).hasSize(databaseSizeBeforeCreate + 1);
         BillItem testBillItem = billItemList.get(billItemList.size() - 1);
         assertThat(testBillItem.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
-        assertThat(testBillItem.getTotalPrice()).isEqualTo(DEFAULT_TOTAL_PRICE);
         assertThat(testBillItem.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
@@ -143,25 +136,6 @@ public class BillItemResourceIT {
 
     @Test
     @Transactional
-    public void checkTotalPriceIsRequired() throws Exception {
-        int databaseSizeBeforeTest = billItemRepository.findAll().size();
-        // set the field null
-        billItem.setTotalPrice(null);
-
-        // Create the BillItem, which fails.
-
-
-        restBillItemMockMvc.perform(post("/api/bill-items")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(billItem)))
-            .andExpect(status().isBadRequest());
-
-        List<BillItem> billItemList = billItemRepository.findAll();
-        assertThat(billItemList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = billItemRepository.findAll().size();
         // set the field null
@@ -191,7 +165,6 @@ public class BillItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(billItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
-            .andExpect(jsonPath("$.[*].totalPrice").value(hasItem(DEFAULT_TOTAL_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
     
@@ -207,7 +180,6 @@ public class BillItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(billItem.getId().intValue()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
-            .andExpect(jsonPath("$.totalPrice").value(DEFAULT_TOTAL_PRICE.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
     @Test
@@ -232,7 +204,6 @@ public class BillItemResourceIT {
         em.detach(updatedBillItem);
         updatedBillItem
             .quantity(UPDATED_QUANTITY)
-            .totalPrice(UPDATED_TOTAL_PRICE)
             .status(UPDATED_STATUS);
 
         restBillItemMockMvc.perform(put("/api/bill-items")
@@ -245,7 +216,6 @@ public class BillItemResourceIT {
         assertThat(billItemList).hasSize(databaseSizeBeforeUpdate);
         BillItem testBillItem = billItemList.get(billItemList.size() - 1);
         assertThat(testBillItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
-        assertThat(testBillItem.getTotalPrice()).isEqualTo(UPDATED_TOTAL_PRICE);
         assertThat(testBillItem.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 

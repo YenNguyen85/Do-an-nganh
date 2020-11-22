@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(BillItemService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new BillItem(0, 0, 0, BillItemStatus.AVAILABLE);
+      elemDefault = new BillItem(0, 0, BillItemStatus.AVAILABLE);
     });
 
     describe('Service methods', () => {
@@ -56,7 +56,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             quantity: 1,
-            totalPrice: 1,
             status: 'BBBBBB',
           },
           elemDefault
@@ -75,7 +74,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             quantity: 1,
-            totalPrice: 1,
             status: 'BBBBBB',
           },
           elemDefault

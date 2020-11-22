@@ -2,7 +2,6 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.BillItem;
 import io.yencute.repository.BillItemRepository;
-import io.yencute.security.SecurityUtils;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -89,7 +88,7 @@ public class BillItemResource {
     @GetMapping("/bill-items")
     public List<BillItem> getAllBillItems() {
         log.debug("REST request to get all BillItems");
-        return billItemRepository.findByBillUserLogin(SecurityUtils.getCurrentUserLogin().orElse(null));
+        return billItemRepository.findAll();
     }
 
     /**

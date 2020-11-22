@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import io.yencute.domain.enumeration.BillItemStatus;
 
@@ -31,11 +30,6 @@ public class BillItem implements Serializable {
     @Min(value = 0)
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
-
-    @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "total_price", precision = 21, scale = 2, nullable = false)
-    private BigDecimal totalPrice;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -70,19 +64,6 @@ public class BillItem implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public BillItem totalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-        return this;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public BillItemStatus getStatus() {
@@ -147,7 +128,6 @@ public class BillItem implements Serializable {
         return "BillItem{" +
             "id=" + getId() +
             ", quantity=" + getQuantity() +
-            ", totalPrice=" + getTotalPrice() +
             ", status='" + getStatus() + "'" +
             "}";
     }

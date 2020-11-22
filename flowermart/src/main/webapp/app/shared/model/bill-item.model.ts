@@ -5,7 +5,6 @@ import { BillItemStatus } from 'app/shared/model/enumerations/bill-item-status.m
 export interface IBillItem {
   id?: number;
   quantity?: number;
-  totalPrice?: number;
   status?: BillItemStatus;
   bill?: IBill;
   product?: IProduct;
@@ -15,7 +14,6 @@ export class BillItem implements IBillItem {
   constructor(
     public id?: number,
     public quantity?: number,
-    public totalPrice?: number,
     public status?: BillItemStatus,
     public bill?: IBill,
     public product?: IProduct
