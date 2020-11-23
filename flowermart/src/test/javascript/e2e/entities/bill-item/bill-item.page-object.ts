@@ -30,7 +30,6 @@ export class BillItemUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   quantityInput = element(by.id('field_quantity'));
-  statusSelect = element(by.id('field_status'));
 
   billSelect = element(by.id('field_bill'));
   productSelect = element(by.id('field_product'));
@@ -45,18 +44,6 @@ export class BillItemUpdatePage {
 
   async getQuantityInput(): Promise<string> {
     return await this.quantityInput.getAttribute('value');
-  }
-
-  async setStatusSelect(status: string): Promise<void> {
-    await this.statusSelect.sendKeys(status);
-  }
-
-  async getStatusSelect(): Promise<string> {
-    return await this.statusSelect.element(by.css('option:checked')).getText();
-  }
-
-  async statusSelectLastOption(): Promise<void> {
-    await this.statusSelect.all(by.tagName('option')).last().click();
   }
 
   async billSelectLastOption(): Promise<void> {

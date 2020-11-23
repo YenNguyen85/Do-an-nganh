@@ -1,10 +1,7 @@
 package io.yencute.web.rest;
 
 import io.yencute.domain.Bill;
-import io.yencute.domain.enumeration.OrderStatus;
 import io.yencute.repository.BillRepository;
-import io.yencute.repository.UserRepository;
-import io.yencute.security.SecurityUtils;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,9 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.Instant;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,13 +35,10 @@ public class BillResource {
     private String applicationName;
 
     private final BillRepository billRepository;
-    private final UserRepository userRepository;
 
-    public BillResource(BillRepository billRepository, UserRepository userRepository) {
+    public BillResource(BillRepository billRepository) {
         this.billRepository = billRepository;
-        this.userRepository = userRepository;
     }
-
 
     /**
      * {@code POST  /bills} : Create a new bill.
@@ -90,14 +81,14 @@ public class BillResource {
     }
 
     /**
-     * {@code GET  /bills} : get all the bills of user login
+     * {@code GET  /bills} : get all the bills.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of bills in body.
      */
     @GetMapping("/bills")
     public List<Bill> getAllBills() {
         log.debug("REST request to get all Bills");
-        return billRepository.findByUserIsCurrentUser();
+        return billRepository.findAll();
     }
 
     /**
@@ -125,32 +116,4 @@ public class BillResource {
         billRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
-
-    /**
-     * {@code GET /bills/cart}: get the bill latest with pending status of user login
-     * @return Bill info
-     */
-    @GetMapping("/bills/cart")
-    public Bill getCart(){
-        log.debug("Get bill cart");
-        return billRepository.findFirstByStatusAndUserLoginOrderByPlacedDateDesc(OrderStatus.PENDING, SecurityUtils.getCurrentUserLogin().orElse(null));
-    }
-
-//    @PostMapping("/bills/cart/new")
-//    public ResponseEntity<Bill> createEmptyBill() throws URISyntaxException {
-//        Bill cartBill = new Bill();
-//        cartBill.setPlacedDate(Instant.now());
-//        cartBill.setStatus(OrderStatus.PENDING);
-//        cartBill.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(null)).get());
-//
-//        log.debug("REST request to save Bill : {}", cartBill);
-//        if (cartBill.getId() != null) {
-//            throw new BadRequestAlertException("A new bill cannot already have an ID", ENTITY_NAME, "idexists");
-//        }
-//
-//        Bill result =  billRepository.save(cartBill);
-//        return ResponseEntity.created(new URI("/api/bills/" + result.getId()))
-//            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-//            .body(result);
-//    }
 }

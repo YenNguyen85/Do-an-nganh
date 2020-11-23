@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import io.yencute.domain.enumeration.ProductStatus;
+
 import io.yencute.domain.enumeration.Size;
 
 /**
@@ -37,6 +39,11 @@ public class Product implements Serializable {
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private ProductStatus status;
 
     @NotNull
     @DecimalMin(value = "0")
@@ -99,6 +106,19 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public Product status(ProductStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
     }
 
     public BigDecimal getPrice() {
@@ -227,6 +247,7 @@ public class Product implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", status='" + getStatus() + "'" +
             ", price=" + getPrice() +
             ", size='" + getSize() + "'" +
             ", image='" + getImage() + "'" +

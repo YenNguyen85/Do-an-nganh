@@ -24,7 +24,7 @@ export class CartService {
 
   addToCart(product: IProduct): void {
     //window.alert(`Đã thêm sản phẩm ${product.name} vào giỏ hàng`)
-    if (this.cart.includes(product) == false) this.cart.push(product);
+    if (this.cart.includes(product) === false) this.cart.push(product);
   }
 
   getCart(): Observable<IProduct[]> {

@@ -9,14 +9,6 @@
         "min"
       ],
       "fieldValidateRulesMin": "0"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "BillItemStatus",
-      "fieldValues": "AVAILABLE,OUT_OF_STOCK",
-      "fieldValidateRules": [
-        "required"
-      ]
     }
   ],
   "relationships": [

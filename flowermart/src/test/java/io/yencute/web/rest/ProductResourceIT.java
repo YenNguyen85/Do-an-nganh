@@ -30,6 +30,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import io.yencute.domain.enumeration.ProductStatus;
 import io.yencute.domain.enumeration.Size;
 /**
  * Integration tests for the {@link ProductResource} REST controller.
@@ -45,6 +46,9 @@ public class ProductResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final ProductStatus DEFAULT_STATUS = ProductStatus.AVAILABLE;
+    private static final ProductStatus UPDATED_STATUS = ProductStatus.OUT_OF_STOCK;
 
     private static final BigDecimal DEFAULT_PRICE = new BigDecimal(0);
     private static final BigDecimal UPDATED_PRICE = new BigDecimal(1);
@@ -81,6 +85,7 @@ public class ProductResourceIT {
         Product product = new Product()
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
+            .status(DEFAULT_STATUS)
             .price(DEFAULT_PRICE)
             .size(DEFAULT_SIZE)
             .image(DEFAULT_IMAGE)
@@ -97,6 +102,7 @@ public class ProductResourceIT {
         Product product = new Product()
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
+            .status(UPDATED_STATUS)
             .price(UPDATED_PRICE)
             .size(UPDATED_SIZE)
             .image(UPDATED_IMAGE)
@@ -125,6 +131,7 @@ public class ProductResourceIT {
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProduct.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testProduct.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testProduct.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testProduct.getSize()).isEqualTo(DEFAULT_SIZE);
         assertThat(testProduct.getImage()).isEqualTo(DEFAULT_IMAGE);
@@ -157,6 +164,25 @@ public class ProductResourceIT {
         int databaseSizeBeforeTest = productRepository.findAll().size();
         // set the field null
         product.setName(null);
+
+        // Create the Product, which fails.
+
+
+        restProductMockMvc.perform(post("/api/products")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(product)))
+            .andExpect(status().isBadRequest());
+
+        List<Product> productList = productRepository.findAll();
+        assertThat(productList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productRepository.findAll().size();
+        // set the field null
+        product.setStatus(null);
 
         // Create the Product, which fails.
 
@@ -221,6 +247,7 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE.toString())))
             .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
@@ -260,6 +287,7 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
             .andExpect(jsonPath("$.size").value(DEFAULT_SIZE.toString()))
             .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
@@ -288,6 +316,7 @@ public class ProductResourceIT {
         updatedProduct
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
+            .status(UPDATED_STATUS)
             .price(UPDATED_PRICE)
             .size(UPDATED_SIZE)
             .image(UPDATED_IMAGE)
@@ -304,6 +333,7 @@ public class ProductResourceIT {
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProduct.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testProduct.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testProduct.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testProduct.getSize()).isEqualTo(UPDATED_SIZE);
         assertThat(testProduct.getImage()).isEqualTo(UPDATED_IMAGE);

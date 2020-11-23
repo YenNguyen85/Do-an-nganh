@@ -18,6 +18,7 @@
       },
       "name": "Name",
       "description": "Description",
+      "status": "Status",
       "price": "Price",
       "size": "Size",
       "image": "Image",

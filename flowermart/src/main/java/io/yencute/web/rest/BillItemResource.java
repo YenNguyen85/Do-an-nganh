@@ -2,7 +2,6 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.BillItem;
 import io.yencute.repository.BillItemRepository;
-import io.yencute.security.SecurityUtils;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -89,7 +88,7 @@ public class BillItemResource {
     @GetMapping("/bill-items")
     public List<BillItem> getAllBillItems() {
         log.debug("REST request to get all BillItems");
-        return billItemRepository.findByBillUserLogin(SecurityUtils.getCurrentUserLogin().orElse(null));
+        return billItemRepository.findAll();
     }
 
     /**
@@ -116,10 +115,5 @@ public class BillItemResource {
         log.debug("REST request to delete BillItem : {}", id);
         billItemRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    @GetMapping("/bill-items/bill/{id}")
-    public List<BillItem> getBillItemsOfBill(@PathVariable Long id){
-        return billItemRepository.findByBillId(id);
     }
 }

@@ -12,10 +12,6 @@
                 <dd>
                     <span>{{ billItem.quantity }}</span>
                 </dd>
-                <dt><span jhiTranslate="flowermartApp.billItem.status">Status</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'flowermartApp.BillItemStatus.' + billItem.status }}">{{ billItem.status }}</span>
-                </dd>
                 <dt><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></dt>
                 <dd>
                     <div *ngIf="billItem.bill">

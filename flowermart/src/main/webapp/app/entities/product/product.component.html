@@ -25,6 +25,7 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.product.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.product.description">Description</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.product.status">Status</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.product.price">Price</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.product.size">Size</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.product.image">Image</span></th>
@@ -37,6 +38,7 @@
                     <td><a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a></td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
+                    <td jhiTranslate="{{ 'flowermartApp.ProductStatus.' + product.status }}">{{ product.status }}</td>
                     <td>{{ product.price }}</td>
                     <td jhiTranslate="{{ 'flowermartApp.Size.' + product.size }}">{{ product.size }}</td>
                     <td>

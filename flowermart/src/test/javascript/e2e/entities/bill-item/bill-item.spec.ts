@@ -42,7 +42,6 @@ describe('BillItem e2e test', () => {
 
     await promise.all([
       billItemUpdatePage.setQuantityInput('5'),
-      billItemUpdatePage.statusSelectLastOption(),
       billItemUpdatePage.billSelectLastOption(),
       billItemUpdatePage.productSelectLastOption(),
     ]);

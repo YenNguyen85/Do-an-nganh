@@ -9,8 +9,6 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
-import io.yencute.domain.enumeration.BillItemStatus;
-
 /**
  * A BillItem.
  */
@@ -30,11 +28,6 @@ public class BillItem implements Serializable {
     @Min(value = 0)
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private BillItemStatus status;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "billItems", allowSetters = true)
@@ -64,19 +57,6 @@ public class BillItem implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public BillItemStatus getStatus() {
-        return status;
-    }
-
-    public BillItem status(BillItemStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    public void setStatus(BillItemStatus status) {
-        this.status = status;
     }
 
     public Bill getBill() {
@@ -128,7 +108,6 @@ public class BillItem implements Serializable {
         return "BillItem{" +
             "id=" + getId() +
             ", quantity=" + getQuantity() +
-            ", status='" + getStatus() + "'" +
             "}";
     }
 }

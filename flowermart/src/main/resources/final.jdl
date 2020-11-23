@@ -29,6 +29,7 @@ enum Size {
 entity Product {
 	name String required
     description TextBlob
+    status ProductStatus required
     price BigDecimal required min(0)
     size Size required
     image ImageBlob
@@ -48,13 +49,12 @@ entity Bill {
     status OrderStatus required
 }
 
-enum BillItemStatus {
+enum ProductStatus {
     AVAILABLE, OUT_OF_STOCK
 }
 
 entity BillItem {
 	quantity Integer required min(0)
-    status BillItemStatus required
 }
 
 relationship OneToOne {

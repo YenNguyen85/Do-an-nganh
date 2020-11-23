@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="product">
-            <h2>{{product.name}}</h2>
+            <h2><span jhiTranslate="flowermartApp.product.detail.title">{{ product.name }}</span></h2>
 
             <hr>
 
@@ -14,11 +14,15 @@
                 </dd>
                 <dt><span jhiTranslate="flowermartApp.product.description">Description</span></dt>
                 <dd>
-                    <span [innerHTML] = "product.description"></span>
+                    <span [innerHTML]="product.description"></span>
+                </dd>
+                <dt><span jhiTranslate="flowermartApp.product.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'flowermartApp.ProductStatus.' + product.status }}">{{ product.status }}</span>
                 </dd>
                 <dt><span jhiTranslate="flowermartApp.product.price">Price</span></dt>
                 <dd>
-                    <span>{{ product.price }}</span>
+                    <span>{{ product.price | currency:"VND":"symbol"}}</span>
                 </dd>
                 <dt><span jhiTranslate="flowermartApp.product.size">Size</span></dt>
                 <dd>
@@ -47,11 +51,10 @@
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                    type="button"
                     [routerLink]="['/product', product.id, 'edit']"
-                    class="btn btn-primary"
-                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                    >
+                    class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
