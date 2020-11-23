@@ -43,7 +43,7 @@
                         <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" class="card-img-top" style="max-width: 100%; height: auto" alt="product image">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text"><span jhiTranslate="flowermartApp.product.price"></span>: {{ product.price }}</p>
+                            <p class="card-text"><span jhiTranslate="flowermartApp.product.price"></span>: {{ product.price | currency:"VND":"symbol"}}</p>
                             <button type="submit"
                                     [routerLink]="['/product', product.id, 'view']"
                                     class="btn btn-info btn-sm">
@@ -54,7 +54,7 @@
                                     type="submit"
                                     class="btn btn-warning btn-sm">
                                 <fa-icon [icon]="cartPlus_icon"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="flowermartApp.product.addToCart">Add to cart</span>
+                                <span class="d-none d-md-inline" jhiTranslate="flowermartApp.product.addToCart" (click)="addToCart(product)">Add to cart</span>
                             </button>
                         </div>
                     </div>

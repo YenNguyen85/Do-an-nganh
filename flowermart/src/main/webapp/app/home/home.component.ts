@@ -12,6 +12,7 @@ import { CategoryService } from 'app/entities/category/category.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
+import { CartService } from 'app/cart/cart.service';
 
 @Component({
   selector: 'jhi-home',
@@ -30,12 +31,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     private loginModalService: LoginModalService,
     protected productService: ProductService,
     protected categoryService: CategoryService,
-    protected eventManager: JhiEventManager
+    protected eventManager: JhiEventManager,
+    protected cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.loadAllCategory();
     this.loadAllProducts();
+  }
+
+  addToCart(product: IProduct): void {
+    this.cartService.addToCart(product);
   }
 
   // Tải danh sách tất cả loại
