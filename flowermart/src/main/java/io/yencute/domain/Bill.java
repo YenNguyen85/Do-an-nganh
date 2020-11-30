@@ -9,8 +9,6 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 import io.yencute.domain.enumeration.OrderStatus;
 
@@ -37,10 +35,6 @@ public class Bill implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private OrderStatus status;
-
-    @OneToMany(mappedBy = "bill")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BillItem> billItems = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "bills", allowSetters = true)
@@ -79,31 +73,6 @@ public class Bill implements Serializable {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
-    }
-
-    public Set<BillItem> getBillItems() {
-        return billItems;
-    }
-
-    public Bill billItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
-        return this;
-    }
-
-    public Bill addBillItem(BillItem billItem) {
-        this.billItems.add(billItem);
-        billItem.setBill(this);
-        return this;
-    }
-
-    public Bill removeBillItem(BillItem billItem) {
-        this.billItems.remove(billItem);
-        billItem.setBill(null);
-        return this;
-    }
-
-    public void setBillItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
     }
 
     public User getUser() {

@@ -51,9 +51,11 @@
                             </button>
                             <button *jhiHasAnyAuthority="'ROLE_USER'"
                                     type="submit"
-                                    class="btn btn-warning btn-sm">
+                                    class="btn btn-warning btn-sm"
+                                    (click)="addToCart(product)"
+                                    >
                                 <fa-icon [icon]="cartPlus_icon"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="flowermartApp.product.addToCart" (click)="addToCart(product)">Add to cart</span>
+                                <span class="d-none d-md-inline" jhiTranslate="flowermartApp.product.addToCart" >Add to cart</span>
                             </button>
                         </div>
                     </div>

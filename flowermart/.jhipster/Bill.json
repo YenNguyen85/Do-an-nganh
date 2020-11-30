@@ -19,12 +19,6 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "billItem",
-      "otherEntityRelationshipName": "bill",
-      "relationshipName": "billItem"
-    },
-    {
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "bill",

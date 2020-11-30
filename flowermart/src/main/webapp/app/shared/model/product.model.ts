@@ -1,4 +1,3 @@
-import { IBillItem } from 'app/shared/model/bill-item.model';
 import { ICategory } from 'app/shared/model/category.model';
 import { ProductStatus } from 'app/shared/model/enumerations/product-status.model';
 import { Size } from 'app/shared/model/enumerations/size.model';
@@ -12,7 +11,6 @@ export interface IProduct {
   size?: Size;
   imageContentType?: string;
   image?: any;
-  billItems?: IBillItem[];
   categories?: ICategory[];
 }
 
@@ -26,7 +24,6 @@ export class Product implements IProduct {
     public size?: Size,
     public imageContentType?: string,
     public image?: any,
-    public billItems?: IBillItem[],
     public categories?: ICategory[]
   ) {}
 }

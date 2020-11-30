@@ -24,8 +24,8 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.quantity">Quantity</span></th>
-                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.product">Product</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,13 +34,13 @@
                     <td><a [routerLink]="['/bill-item', billItem.id, 'view']">{{ billItem.id }}</a></td>
                     <td>{{ billItem.quantity }}</td>
                     <td>
-                        <div *ngIf="billItem.bill">
-                            <a [routerLink]="['/bill', billItem.bill?.id, 'view']" >{{ billItem.bill?.id }}</a>
+                        <div *ngIf="billItem.product">
+                            <a [routerLink]="['/product', billItem.product?.id, 'view']" >{{ billItem.product?.name }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="billItem.product">
-                            <a [routerLink]="['/product', billItem.product?.id, 'view']" >{{ billItem.product?.name }}</a>
+                        <div *ngIf="billItem.bill">
+                            <a [routerLink]="['/bill', billItem.bill?.id, 'view']" >{{ billItem.bill?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

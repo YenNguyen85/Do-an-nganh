@@ -18,10 +18,10 @@
             <column name="quantity" type="integer">
                 <constraints nullable="false" />
             </column>
-            <column name="bill_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="product_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_bill_item_product_id" />
+            </column>
+            <column name="bill_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

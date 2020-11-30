@@ -29,13 +29,13 @@ public class BillItem implements Serializable {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "billItems", allowSetters = true)
-    private Bill bill;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Product product;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "billItems", allowSetters = true)
-    private Product product;
+    private Bill bill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -59,19 +59,6 @@ public class BillItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public BillItem bill(Bill bill) {
-        this.bill = bill;
-        return this;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -83,6 +70,19 @@ public class BillItem implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public BillItem bill(Bill bill) {
+        this.bill = bill;
+        return this;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

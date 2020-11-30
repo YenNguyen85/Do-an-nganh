@@ -32,18 +32,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="flowermartApp.billItem.bill" for="field_bill">Bill</label>
-                    <select class="form-control" id="field_bill" name="bill" formControlName="bill">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="billOption.id === editForm.get('bill')!.value?.id ? editForm.get('bill')!.value : billOption" *ngFor="let billOption of bills; trackBy: trackById">{{ billOption.id }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="flowermartApp.billItem.product" for="field_product">Product</label>
                     <select class="form-control" id="field_product" name="product" formControlName="product">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="productOption.id === editForm.get('product')!.value?.id ? editForm.get('product')!.value : productOption" *ngFor="let productOption of products; trackBy: trackById">{{ productOption.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="flowermartApp.billItem.bill" for="field_bill">Bill</label>
+                    <select class="form-control" id="field_bill" name="bill" formControlName="bill">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="billOption.id === editForm.get('bill')!.value?.id ? editForm.get('bill')!.value : billOption" *ngFor="let billOption of bills; trackBy: trackById">{{ billOption.id }}</option>
                     </select>
                 </div>
             </div>

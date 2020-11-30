@@ -62,10 +62,6 @@ public class Product implements Serializable {
     @Column(name = "image_content_type")
     private String imageContentType;
 
-    @OneToMany(mappedBy = "product")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BillItem> billItems = new HashSet<>();
-
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "product_category",
@@ -171,31 +167,6 @@ public class Product implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
-    }
-
-    public Set<BillItem> getBillItems() {
-        return billItems;
-    }
-
-    public Product billItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
-        return this;
-    }
-
-    public Product addBillItem(BillItem billItem) {
-        this.billItems.add(billItem);
-        billItem.setProduct(this);
-        return this;
-    }
-
-    public Product removeBillItem(BillItem billItem) {
-        this.billItems.remove(billItem);
-        billItem.setProduct(null);
-        return this;
-    }
-
-    public void setBillItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
     }
 
     public Set<Category> getCategories() {
