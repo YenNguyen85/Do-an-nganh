@@ -164,3 +164,99 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+//color
+$color-primary: #fcb83b;
+$color-primary-1: #d18800;
+$color-primary-2: #e4bd74;
+
+$color-white: white;
+$color-white-1: #eee;
+$color-white-2: #ddd;
+$color-white-3: #f9f9f9;
+$color-white-4: #f8f8f8;
+$color-white-5: #f0f0f0;
+
+$color-gray: #ccc;
+$color-gray-1: #696969;
+$color-gray-2: #888;
+
+$color-black: black;
+$color-black-1: #242424;
+$color-black-2: #48494b;
+$color-black-3: #333333;
+
+$color-pink: #e28985;
+$color-pink-1: #ec625a;
+$color-pink-2: #eec0c0;
+
+$color-red: #f44336;
+$color-red-1: #d32f2f;
+$color-red-2: #e57373;
+
+$color-green: #4caf50;
+$color-green-1: #388e3c;
+$color-green-2: #dff2d6;
+
+$color-blue: #2196f3;
+$color-blue-1: #1976d2;
+$color-blue-2: #64b5f6;
+
+$color-opacity-black: rgba(0, 0, 0, 0.2);
+$color-opacity-black-1: rgba(0, 0, 0, 0.35);
+$color-opacity-black-2: rgba(0, 0, 0, 0.5);
+$color-opacity-primary: rgba(252, 184, 59, 0.5);
+$color-opacity-white: rgba(255, 255, 255, 0.25);
+$color-opacity-gray: rgba(221, 221, 221, 0.5);
+
+//width
+$w: 1200px;
+
+//break point
+$bp-xs: 0px;
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+
+@mixin width-frame {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+@mixin xs {
+  @media (max-width: #{$bp-sm - 1}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: #{$bp-md - 1}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$bp-lg - 1}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$bp-xl - 1}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$bp-xl}) {
+    @content;
+  }
+}
+
+@mixin custom-responsive($screen) {
+  @media (max-width: ($screen - 1) + 'px') {
+    @content;
+  }
+}
