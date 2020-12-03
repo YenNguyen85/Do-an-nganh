@@ -1,0 +1,41 @@
+@import '../../../content/scss/global.scss';
+
+.product-detail {
+  @include width-frame;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  div {
+    width: 100%;
+  }
+}
+
+.product-img {
+  display: flex;
+  align-items: center;
+  div {
+    text-align: center;
+  }
+}
+
+.product-status {
+  h2 {
+    color: rgb(252, 184, 59);
+    font-style: bold;
+    font-weight: 600;
+  }
+
+  .price {
+    color: rgb(252, 184, 59);
+    font-style: thin;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+}
+
+.product-description {
+  dt span {
+    font-size: 1.1rem;
+  }
+}

@@ -1,49 +1,113 @@
-<div class="row justify-content-center">
+<div class="product-detail">
+    <div *ngIf="product">
+        <jhi-alert-error></jhi-alert-error>
+
+        <button type="submit"
+                (click)="previousState()"
+                class="btn btn-info">
+            <fa-icon icon="arrow-left"></fa-icon>
+        </button>
+
+        <div class="row">
+            <div class="col-md-4 product-img">
+                <div *ngIf="product.image">
+                    <a (click)="openFile(product.imageContentType, product.image)">
+                        <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-8 product-status">
+                <h2>{{ product.name }}</h2>
+                <hr>
+                <span class="price">{{ product.price | currency:"VND":"symbol"}}</span>
+
+                <dt><span jhiTranslate="flowermartApp.product.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'flowermartApp.ProductStatus.' + product.status }}">{{ product.status }}</span>
+                </dd>
+
+                <dt><span jhiTranslate="flowermartApp.product.size">Size</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'flowermartApp.Size.' + product.size }}">{{ product.size }}</span>
+                </dd>
+
+                <dt><span jhiTranslate="flowermartApp.product.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of product.categories; let last = last">
+                        <a [routerLink]="['/']">{{ category.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+
+                <button *jhiHasAnyAuthority="'ROLE_USER'" type="button"
+                    class="btn btn-success">
+                    <fa-icon [icon]="cartPlus_icon"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="flowermartApp.product.addToCart">Add to cart</span>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="product-description mx-auto">
+            <dt><span jhiTranslate="flowermartApp.product.description">Description</span></dt>
+            <dd>
+                <span [innerHTML]="product.description"></span>
+            </dd>
+        </div>
+
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
+                [routerLink]="['/product', product.id, 'edit']"
+                class="btn btn-primary">
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+    </div>
+</div>
+
+<!-- <div class="row justify-content-center mb-3">
     <div class="col-8">
         <div *ngIf="product">
-            <h2><span jhiTranslate="flowermartApp.product.detail.title">Product</span> {{ product.id }}</h2>
+            <h2>{{ product.name }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="flowermartApp.product.name">Name</span></dt>
-                <dd>
-                    <span>{{ product.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.product.description">Description</span></dt>
-                <dd>
-                    <span [innerHTML]="product.description"></span>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.product.status">Status</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'flowermartApp.ProductStatus.' + product.status }}">{{ product.status }}</span>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.product.price">Price</span></dt>
-                <dd>
-                    <span>{{ product.price | currency:"VND":"symbol"}}</span>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.product.size">Size</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'flowermartApp.Size.' + product.size }}">{{ product.size }}</span>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.product.image">Image</span></dt>
-                <dd>
+            <div class="row-md jh-entity-details">
+                <div class="col-md-4">
                     <div *ngIf="product.image">
                         <a (click)="openFile(product.imageContentType, product.image)">
                             <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
                         </a>
-                        {{ product.imageContentType }}, {{ byteSize(product.image) }}
                     </div>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.product.category">Category</span></dt>
-                <dd>
-                    <span *ngFor="let category of product.categories; let last = last">
-                        <a [routerLink]="['/category', category?.id, 'view']">{{ category.name }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-            </dl>
+                </div>
+
+                <div class="col-md-6">
+                    <dt><span jhiTranslate="flowermartApp.product.description">Description</span></dt>
+                    <dd>
+                        <span [innerHTML]="product.description"></span>
+                    </dd>
+                    <dt><span jhiTranslate="flowermartApp.product.status">Status</span></dt>
+                    <dd>
+                        <span style="color:green" jhiTranslate="{{ 'flowermartApp.ProductStatus.' + product.status }}">{{ product.status }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="flowermartApp.product.price">Price</span></dt>
+                    <dd>
+                        <span>{{ product.price | currency:"VND":"symbol"}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="flowermartApp.product.size">Size</span></dt>
+                    <dd>
+                        <span jhiTranslate="{{ 'flowermartApp.Size.' + product.size }}">{{ product.size }}</span>
+                    </dd>
+
+                    <dt><span jhiTranslate="flowermartApp.product.category">Category</span></dt>
+                    <dd>
+                        <span *ngFor="let category of product.categories; let last = last">
+                            <a [routerLink]="['/category', category?.id, 'view']">{{ category.name }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </dd>
+                </div>
+
+
+            </div>
 
             <button type="submit"
                     (click)="previousState()"
@@ -58,4 +122,4 @@
             </button>
         </div>
     </div>
-</div>
+</div> -->

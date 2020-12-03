@@ -18,7 +18,9 @@
             <li class="items" *ngFor="let product of products">
                 <div class="infoWrap">
                     <div class="cartSection">
-                        <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 30px;" alt="product image"/>
+                        <div *ngIf="product.image">
+                            <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 30px;" alt="product image"/>
+                        </div>
 
                         <h3>{{product.name}}</h3>
 
