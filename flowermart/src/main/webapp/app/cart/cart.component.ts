@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 
 import { IBill } from 'app/shared/model/bill.model';
-import { BillItem, IBillItem } from 'app/shared/model/bill-item.model';
+import { IBillItem } from 'app/shared/model/bill-item.model';
 
 import { Observable, Subscription } from 'rxjs';
 import { CartService } from './cart.service';
@@ -32,6 +32,7 @@ export class CartComponent implements OnInit {
 
   loadAll(): void {
     this.cartService.getCart().subscribe(res => (this.products = res));
+    // eslint-disable-next-line
     //this.cartService.getCart().subscribe((res: HttpResponse<IBill>) => this.bill = res.body || undefined );
   }
 
