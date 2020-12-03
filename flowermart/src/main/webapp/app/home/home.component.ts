@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (category.id != null) {
       this.productService.findByCategoriesId(category.id).subscribe((res: HttpResponse<IProduct[]>) => (this.products = res.body || []));
     } else {
-      alert('category is null');
+      this.productService.query().subscribe((res: HttpResponse<IProduct[]>) => (this.products = res.body || []));
     }
   }
 
