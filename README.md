@@ -12,4 +12,4 @@
 
 
 [LIKE Queries in Spring JPA Repositories](https://www.baeldung.com/spring-jpa-like-queries#4-case-insensitivity)
-
+[Derived Query Methods in Spring Data JPA Repositories](https://www.baeldung.com/spring-data-derived-queries)
