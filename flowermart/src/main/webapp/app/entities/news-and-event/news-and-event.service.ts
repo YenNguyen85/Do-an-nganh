@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption, Search } from 'app/shared/util/request-util';
+import { createRequestOption } from 'app/shared/util/request-util';
 import { INewsAndEvent } from 'app/shared/model/news-and-event.model';
 
 type EntityResponseType = HttpResponse<INewsAndEvent>;
@@ -14,7 +14,6 @@ type EntityArrayResponseType = HttpResponse<INewsAndEvent[]>;
 @Injectable({ providedIn: 'root' })
 export class NewsAndEventService {
   public resourceUrl = SERVER_API_URL + 'api/news-and-events';
-  public resourceSearchUrl = SERVER_API_URL + 'api/_search/news-and-events';
 
   constructor(protected http: HttpClient) {}
 
@@ -47,13 +46,6 @@ export class NewsAndEventService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
-  }
-
-  search(req: Search): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
-    return this.http
-      .get<INewsAndEvent[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   protected convertDateFromClient(newsAndEvent: INewsAndEvent): INewsAndEvent {

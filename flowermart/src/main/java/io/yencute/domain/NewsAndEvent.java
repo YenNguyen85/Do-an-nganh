@@ -7,7 +7,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -17,7 +16,6 @@ import java.time.Instant;
 @Entity
 @Table(name = "news_and_event")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "newsandevent")
 public class NewsAndEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;

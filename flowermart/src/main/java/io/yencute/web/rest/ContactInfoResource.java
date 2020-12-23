@@ -2,7 +2,6 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.ContactInfo;
 import io.yencute.repository.ContactInfoRepository;
-import io.yencute.repository.search.ContactInfoSearchRepository;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,10 +18,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link io.yencute.domain.ContactInfo}.
@@ -41,11 +36,8 @@ public class ContactInfoResource {
 
     private final ContactInfoRepository contactInfoRepository;
 
-    private final ContactInfoSearchRepository contactInfoSearchRepository;
-
-    public ContactInfoResource(ContactInfoRepository contactInfoRepository, ContactInfoSearchRepository contactInfoSearchRepository) {
+    public ContactInfoResource(ContactInfoRepository contactInfoRepository) {
         this.contactInfoRepository = contactInfoRepository;
-        this.contactInfoSearchRepository = contactInfoSearchRepository;
     }
 
     /**
@@ -62,7 +54,6 @@ public class ContactInfoResource {
             throw new BadRequestAlertException("A new contactInfo cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ContactInfo result = contactInfoRepository.save(contactInfo);
-        contactInfoSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/contact-infos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -84,7 +75,6 @@ public class ContactInfoResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         ContactInfo result = contactInfoRepository.save(contactInfo);
-        contactInfoSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contactInfo.getId().toString()))
             .body(result);
@@ -124,22 +114,6 @@ public class ContactInfoResource {
     public ResponseEntity<Void> deleteContactInfo(@PathVariable Long id) {
         log.debug("REST request to delete ContactInfo : {}", id);
         contactInfoRepository.deleteById(id);
-        contactInfoSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * {@code SEARCH  /_search/contact-infos?query=:query} : search for the contactInfo corresponding
-     * to the query.
-     *
-     * @param query the query of the contactInfo search.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/contact-infos")
-    public List<ContactInfo> searchContactInfos(@RequestParam String query) {
-        log.debug("REST request to search ContactInfos for query {}", query);
-        return StreamSupport
-            .stream(contactInfoSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
     }
 }

@@ -4,7 +4,7 @@
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bill-item" [routerLink]="['/bill-item/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="flowermartApp.billItem.home.createLabel">
+            <span  jhiTranslate="flowermartApp.billItem.home.createLabel">
             Create a new Bill Item
             </span>
         </button>
@@ -13,24 +13,6 @@
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'flowermartApp.billItem.home.search' | translate }}">
-
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon icon="search"></fa-icon>
-                    </button>
-
-                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
-                        <fa-icon icon="trash-alt"></fa-icon>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="billItems?.length === 0">
         <span jhiTranslate="flowermartApp.billItem.home.notFound">No billItems found</span>
@@ -42,10 +24,8 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.quantity">Quantity</span></th>
-                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.totalPrice">Total Price</span></th>
-                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.status">Status</span></th>
-                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.billItem.product">Product</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -53,16 +33,14 @@
                 <tr *ngFor="let billItem of billItems ;trackBy: trackId">
                     <td><a [routerLink]="['/bill-item', billItem.id, 'view']">{{ billItem.id }}</a></td>
                     <td>{{ billItem.quantity }}</td>
-                    <td>{{ billItem.totalPrice }}</td>
-                    <td jhiTranslate="{{ 'flowermartApp.BillItemStatus.' + billItem.status }}">{{ billItem.status }}</td>
-                    <td>
-                        <div *ngIf="billItem.bill">
-                            <a [routerLink]="['/bill', billItem.bill?.id, 'view']" >{{ billItem.bill?.id }}</a>
-                        </div>
-                    </td>
                     <td>
                         <div *ngIf="billItem.product">
                             <a [routerLink]="['/product', billItem.product?.id, 'view']" >{{ billItem.product?.name }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="billItem.bill">
+                            <a [routerLink]="['/bill', billItem.bill?.id, 'view']" >{{ billItem.bill?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

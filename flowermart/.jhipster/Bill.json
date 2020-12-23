@@ -19,20 +19,14 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "billItem",
-      "otherEntityRelationshipName": "bill",
-      "relationshipName": "billItem"
-    },
-    {
       "relationshipType": "many-to-one",
-      "otherEntityName": "customer",
+      "otherEntityName": "user",
       "otherEntityRelationshipName": "bill",
-      "relationshipName": "customer",
-      "otherEntityField": "id"
+      "relationshipName": "user",
+      "otherEntityField": "email"
     }
   ],
-  "changelogDate": "20201107142835",
+  "changelogDate": "20201113133621",
   "entityTableName": "bill",
   "dto": "no",
   "pagination": "no",

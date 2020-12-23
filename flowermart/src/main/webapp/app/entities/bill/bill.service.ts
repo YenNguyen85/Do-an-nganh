@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption, Search } from 'app/shared/util/request-util';
+import { createRequestOption } from 'app/shared/util/request-util';
 import { IBill } from 'app/shared/model/bill.model';
 
 type EntityResponseType = HttpResponse<IBill>;
@@ -14,7 +14,6 @@ type EntityArrayResponseType = HttpResponse<IBill[]>;
 @Injectable({ providedIn: 'root' })
 export class BillService {
   public resourceUrl = SERVER_API_URL + 'api/bills';
-  public resourceSearchUrl = SERVER_API_URL + 'api/_search/bills';
 
   constructor(protected http: HttpClient) {}
 
@@ -47,13 +46,6 @@ export class BillService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
-  }
-
-  search(req: Search): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
-    return this.http
-      .get<IBill[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   protected convertDateFromClient(bill: IBill): IBill {

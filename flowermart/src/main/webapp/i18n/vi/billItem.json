@@ -5,7 +5,6 @@
         "title": "Bill Items",
         "createLabel": "Thêm mới một Bill Item",
         "createOrEditLabel": "Thêm mới hoặc cập nhật Bill Item",
-        "search": "Tìm Bill Item",
         "notFound": "No Bill Items found"
       },
       "created": "Một Bill Item mới được tạo với định danh {{ param }}",
@@ -18,10 +17,8 @@
         "title": "Bill Item"
       },
       "quantity": "Quantity",
-      "totalPrice": "Total Price",
-      "status": "Status",
-      "bill": "Bill",
-      "product": "Product"
+      "product": "Product",
+      "bill": "Bill"
     }
   }
 }

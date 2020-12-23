@@ -31,6 +31,7 @@ export class ProductUpdatePage {
 
   nameInput = element(by.id('field_name'));
   descriptionInput = element(by.id('field_description'));
+  statusSelect = element(by.id('field_status'));
   priceInput = element(by.id('field_price'));
   sizeSelect = element(by.id('field_size'));
   imageInput = element(by.id('file_image'));
@@ -55,6 +56,18 @@ export class ProductUpdatePage {
 
   async getDescriptionInput(): Promise<string> {
     return await this.descriptionInput.getAttribute('value');
+  }
+
+  async setStatusSelect(status: string): Promise<void> {
+    await this.statusSelect.sendKeys(status);
+  }
+
+  async getStatusSelect(): Promise<string> {
+    return await this.statusSelect.element(by.css('option:checked')).getText();
+  }
+
+  async statusSelectLastOption(): Promise<void> {
+    await this.statusSelect.all(by.tagName('option')).last().click();
   }
 
   async setPriceInput(price: string): Promise<void> {

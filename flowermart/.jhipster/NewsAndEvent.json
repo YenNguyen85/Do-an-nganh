@@ -19,7 +19,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20201107142435",
+  "changelogDate": "20201113133221",
   "entityTableName": "news_and_event",
   "dto": "no",
   "pagination": "no",

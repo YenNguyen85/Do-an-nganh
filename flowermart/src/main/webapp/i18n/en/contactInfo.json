@@ -5,7 +5,6 @@
         "title": "Contact Infos",
         "createLabel": "Create a new Contact Info",
         "createOrEditLabel": "Create or edit a Contact Info",
-        "search": "Search for Contact Info",
         "notFound": "No Contact Infos found"
       },
       "created": "A new Contact Info is created with identifier {{ param }}",

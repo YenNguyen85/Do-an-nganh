@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption, Search } from 'app/shared/util/request-util';
+import { createRequestOption } from 'app/shared/util/request-util';
 import { IContactInfo } from 'app/shared/model/contact-info.model';
 
 type EntityResponseType = HttpResponse<IContactInfo>;
@@ -12,7 +12,6 @@ type EntityArrayResponseType = HttpResponse<IContactInfo[]>;
 @Injectable({ providedIn: 'root' })
 export class ContactInfoService {
   public resourceUrl = SERVER_API_URL + 'api/contact-infos';
-  public resourceSearchUrl = SERVER_API_URL + 'api/_search/contact-infos';
 
   constructor(protected http: HttpClient) {}
 
@@ -35,10 +34,5 @@ export class ContactInfoService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
-  }
-
-  search(req: Search): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
-    return this.http.get<IContactInfo[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
   }
 }

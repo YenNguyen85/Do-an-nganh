@@ -15,6 +15,10 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 
+// embeded text editor
+import { QuillModule } from 'ngx-quill';
+import { CartComponent } from './cart/cart.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -24,8 +28,10 @@ import { ErrorComponent } from './layouts/error/error.component';
     // jhipster-needle-angular-add-module JHipster will add new module here
     FlowermartEntityModule,
     FlowermartAppRoutingModule,
+    // embeded text editor module
+    QuillModule.forRoot(),
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, CartComponent],
   bootstrap: [MainComponent],
 })
 export class FlowermartAppModule {}

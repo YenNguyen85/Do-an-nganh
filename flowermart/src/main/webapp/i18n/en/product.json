@@ -5,7 +5,6 @@
         "title": "Products",
         "createLabel": "Create a new Product",
         "createOrEditLabel": "Create or edit a Product",
-        "search": "Search for Product",
         "notFound": "No Products found"
       },
       "created": "A new Product is created with identifier {{ param }}",
@@ -19,11 +18,12 @@
       },
       "name": "Name",
       "description": "Description",
+      "status": "Status",
       "price": "Price",
       "size": "Size",
       "image": "Image",
-      "billItem": "Bill Item",
-      "category": "Category"
+      "category": "Category",
+      "addToCart": "Add to cart"
     }
   }
 }

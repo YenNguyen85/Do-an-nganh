@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProductService } from 'app/entities/product/product.service';
 import { IProduct, Product } from 'app/shared/model/product.model';
+import { ProductStatus } from 'app/shared/model/enumerations/product-status.model';
 import { Size } from 'app/shared/model/enumerations/size.model';
 
 describe('Service Tests', () => {
@@ -21,7 +22,7 @@ describe('Service Tests', () => {
       service = injector.get(ProductService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Product(0, 'AAAAAAA', 'AAAAAAA', 0, Size.NORMAL, 'image/png', 'AAAAAAA');
+      elemDefault = new Product(0, 'AAAAAAA', 'AAAAAAA', ProductStatus.AVAILABLE, 0, Size.NORMAL, 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -57,6 +58,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             description: 'BBBBBB',
+            status: 'BBBBBB',
             price: 1,
             size: 'BBBBBB',
             image: 'BBBBBB',
@@ -78,6 +80,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             description: 'BBBBBB',
+            status: 'BBBBBB',
             price: 1,
             size: 'BBBBBB',
             image: 'BBBBBB',

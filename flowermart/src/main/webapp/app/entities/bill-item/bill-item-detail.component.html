@@ -12,24 +12,16 @@
                 <dd>
                     <span>{{ billItem.quantity }}</span>
                 </dd>
-                <dt><span jhiTranslate="flowermartApp.billItem.totalPrice">Total Price</span></dt>
+                <dt><span jhiTranslate="flowermartApp.billItem.product">Product</span></dt>
                 <dd>
-                    <span>{{ billItem.totalPrice }}</span>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.billItem.status">Status</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'flowermartApp.BillItemStatus.' + billItem.status }}">{{ billItem.status }}</span>
+                    <div *ngIf="billItem.product">
+                        <a [routerLink]="['/product', billItem.product?.id, 'view']">{{ billItem.product?.name }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="flowermartApp.billItem.bill">Bill</span></dt>
                 <dd>
                     <div *ngIf="billItem.bill">
                         <a [routerLink]="['/bill', billItem.bill?.id, 'view']">{{ billItem.bill?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="flowermartApp.billItem.product">Product</span></dt>
-                <dd>
-                    <div *ngIf="billItem.product">
-                        <a [routerLink]="['/product', billItem.product?.id, 'view']">{{ billItem.product?.name }}</a>
                     </div>
                 </dd>
             </dl>

@@ -2,7 +2,6 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BillItemService } from 'app/entities/bill-item/bill-item.service';
 import { IBillItem, BillItem } from 'app/shared/model/bill-item.model';
-import { BillItemStatus } from 'app/shared/model/enumerations/bill-item-status.model';
 
 describe('Service Tests', () => {
   describe('BillItem Service', () => {
@@ -21,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(BillItemService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new BillItem(0, 0, 0, BillItemStatus.AVAILABLE);
+      elemDefault = new BillItem(0, 0);
     });
 
     describe('Service methods', () => {
@@ -56,8 +55,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             quantity: 1,
-            totalPrice: 1,
-            status: 'BBBBBB',
           },
           elemDefault
         );
@@ -75,8 +72,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             quantity: 1,
-            totalPrice: 1,
-            status: 'BBBBBB',
           },
           elemDefault
         );

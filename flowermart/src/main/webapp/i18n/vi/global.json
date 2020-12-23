@@ -9,13 +9,14 @@
         "main": "Thực thể",
         "contactInfo": "Contact Info",
         "newsAndEvent": "News And Event",
-        "customer": "Customer",
-        "product": "Product",
-        "category": "Category",
+        "infoCustomer": "Thông tin khách hàng",
+        "product": "Sản phẩm",
+        "category": "Loại sản phẩm",
         "bill": "Bill",
         "billItem": "Bill Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
+      "cart": "Giỏ hàng",
       "account": {
         "main": "Tài khoản",
         "settings": "Cài đặt",

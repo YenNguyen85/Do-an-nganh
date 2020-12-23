@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,36 +15,11 @@ import { BillItemDeleteDialogComponent } from './bill-item-delete-dialog.compone
 export class BillItemComponent implements OnInit, OnDestroy {
   billItems?: IBillItem[];
   eventSubscriber?: Subscription;
-  currentSearch: string;
 
-  constructor(
-    protected billItemService: BillItemService,
-    protected eventManager: JhiEventManager,
-    protected modalService: NgbModal,
-    protected activatedRoute: ActivatedRoute
-  ) {
-    this.currentSearch =
-      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
-        ? this.activatedRoute.snapshot.queryParams['search']
-        : '';
-  }
+  constructor(protected billItemService: BillItemService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
 
   loadAll(): void {
-    if (this.currentSearch) {
-      this.billItemService
-        .search({
-          query: this.currentSearch,
-        })
-        .subscribe((res: HttpResponse<IBillItem[]>) => (this.billItems = res.body || []));
-      return;
-    }
-
     this.billItemService.query().subscribe((res: HttpResponse<IBillItem[]>) => (this.billItems = res.body || []));
-  }
-
-  search(query: string): void {
-    this.currentSearch = query;
-    this.loadAll();
   }
 
   ngOnInit(): void {

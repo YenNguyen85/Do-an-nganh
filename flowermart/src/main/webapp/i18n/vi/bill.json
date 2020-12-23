@@ -5,7 +5,6 @@
         "title": "Bills",
         "createLabel": "Thêm mới một Bill",
         "createOrEditLabel": "Thêm mới hoặc cập nhật Bill",
-        "search": "Tìm Bill",
         "notFound": "No Bills found"
       },
       "created": "Một Bill mới được tạo với định danh {{ param }}",
@@ -20,7 +19,7 @@
       "placedDate": "Placed Date",
       "status": "Status",
       "billItem": "Bill Item",
-      "customer": "Customer"
+      "user": "User"
     }
   }
 }

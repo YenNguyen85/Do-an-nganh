@@ -44,10 +44,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="flowermartApp.bill.customer" for="field_customer">Customer</label>
-                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                    <label class="form-control-label" jhiTranslate="flowermartApp.bill.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="user">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.id }}</option>
+                        <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.email }}</option>
                     </select>
                 </div>
             </div>

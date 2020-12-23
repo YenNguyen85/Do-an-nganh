@@ -3,13 +3,9 @@ package io.yencute.web.rest;
 import io.yencute.FlowermartApp;
 import io.yencute.domain.ContactInfo;
 import io.yencute.repository.ContactInfoRepository;
-import io.yencute.repository.search.ContactInfoSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,13 +14,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link ContactInfoResource} REST controller.
  */
 @SpringBootTest(classes = FlowermartApp.class)
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class ContactInfoResourceIT {
@@ -45,14 +37,6 @@ public class ContactInfoResourceIT {
 
     @Autowired
     private ContactInfoRepository contactInfoRepository;
-
-    /**
-     * This repository is mocked in the io.yencute.repository.search test package.
-     *
-     * @see io.yencute.repository.search.ContactInfoSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private ContactInfoSearchRepository mockContactInfoSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -108,9 +92,6 @@ public class ContactInfoResourceIT {
         ContactInfo testContactInfo = contactInfoList.get(contactInfoList.size() - 1);
         assertThat(testContactInfo.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testContactInfo.getPhone()).isEqualTo(DEFAULT_PHONE);
-
-        // Validate the ContactInfo in Elasticsearch
-        verify(mockContactInfoSearchRepository, times(1)).save(testContactInfo);
     }
 
     @Test
@@ -130,9 +111,6 @@ public class ContactInfoResourceIT {
         // Validate the ContactInfo in the database
         List<ContactInfo> contactInfoList = contactInfoRepository.findAll();
         assertThat(contactInfoList).hasSize(databaseSizeBeforeCreate);
-
-        // Validate the ContactInfo in Elasticsearch
-        verify(mockContactInfoSearchRepository, times(0)).save(contactInfo);
     }
 
 
@@ -238,9 +216,6 @@ public class ContactInfoResourceIT {
         ContactInfo testContactInfo = contactInfoList.get(contactInfoList.size() - 1);
         assertThat(testContactInfo.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testContactInfo.getPhone()).isEqualTo(UPDATED_PHONE);
-
-        // Validate the ContactInfo in Elasticsearch
-        verify(mockContactInfoSearchRepository, times(1)).save(testContactInfo);
     }
 
     @Test
@@ -257,9 +232,6 @@ public class ContactInfoResourceIT {
         // Validate the ContactInfo in the database
         List<ContactInfo> contactInfoList = contactInfoRepository.findAll();
         assertThat(contactInfoList).hasSize(databaseSizeBeforeUpdate);
-
-        // Validate the ContactInfo in Elasticsearch
-        verify(mockContactInfoSearchRepository, times(0)).save(contactInfo);
     }
 
     @Test
@@ -278,26 +250,5 @@ public class ContactInfoResourceIT {
         // Validate the database contains one less item
         List<ContactInfo> contactInfoList = contactInfoRepository.findAll();
         assertThat(contactInfoList).hasSize(databaseSizeBeforeDelete - 1);
-
-        // Validate the ContactInfo in Elasticsearch
-        verify(mockContactInfoSearchRepository, times(1)).deleteById(contactInfo.getId());
-    }
-
-    @Test
-    @Transactional
-    public void searchContactInfo() throws Exception {
-        // Configure the mock search repository
-        // Initialize the database
-        contactInfoRepository.saveAndFlush(contactInfo);
-        when(mockContactInfoSearchRepository.search(queryStringQuery("id:" + contactInfo.getId())))
-            .thenReturn(Collections.singletonList(contactInfo));
-
-        // Search the contactInfo
-        restContactInfoMockMvc.perform(get("/api/_search/contact-infos?query=id:" + contactInfo.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(contactInfo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)));
     }
 }

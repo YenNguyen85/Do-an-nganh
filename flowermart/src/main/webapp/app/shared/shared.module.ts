@@ -5,9 +5,10 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
-  imports: [FlowermartSharedLibsModule],
+  imports: [FlowermartSharedLibsModule, QuillModule.forRoot()],
   declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -17,6 +18,7 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
+    QuillModule,
   ],
 })
 export class FlowermartSharedModule {}

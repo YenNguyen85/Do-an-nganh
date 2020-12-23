@@ -3,13 +3,9 @@ package io.yencute.web.rest;
 import io.yencute.FlowermartApp;
 import io.yencute.domain.Bill;
 import io.yencute.repository.BillRepository;
-import io.yencute.repository.search.BillSearchRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,13 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -35,7 +28,6 @@ import io.yencute.domain.enumeration.OrderStatus;
  * Integration tests for the {@link BillResource} REST controller.
  */
 @SpringBootTest(classes = FlowermartApp.class)
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class BillResourceIT {
@@ -48,14 +40,6 @@ public class BillResourceIT {
 
     @Autowired
     private BillRepository billRepository;
-
-    /**
-     * This repository is mocked in the io.yencute.repository.search test package.
-     *
-     * @see io.yencute.repository.search.BillSearchRepositoryMockConfiguration
-     */
-    @Autowired
-    private BillSearchRepository mockBillSearchRepository;
 
     @Autowired
     private EntityManager em;
@@ -111,9 +95,6 @@ public class BillResourceIT {
         Bill testBill = billList.get(billList.size() - 1);
         assertThat(testBill.getPlacedDate()).isEqualTo(DEFAULT_PLACED_DATE);
         assertThat(testBill.getStatus()).isEqualTo(DEFAULT_STATUS);
-
-        // Validate the Bill in Elasticsearch
-        verify(mockBillSearchRepository, times(1)).save(testBill);
     }
 
     @Test
@@ -133,9 +114,6 @@ public class BillResourceIT {
         // Validate the Bill in the database
         List<Bill> billList = billRepository.findAll();
         assertThat(billList).hasSize(databaseSizeBeforeCreate);
-
-        // Validate the Bill in Elasticsearch
-        verify(mockBillSearchRepository, times(0)).save(bill);
     }
 
 
@@ -241,9 +219,6 @@ public class BillResourceIT {
         Bill testBill = billList.get(billList.size() - 1);
         assertThat(testBill.getPlacedDate()).isEqualTo(UPDATED_PLACED_DATE);
         assertThat(testBill.getStatus()).isEqualTo(UPDATED_STATUS);
-
-        // Validate the Bill in Elasticsearch
-        verify(mockBillSearchRepository, times(1)).save(testBill);
     }
 
     @Test
@@ -260,9 +235,6 @@ public class BillResourceIT {
         // Validate the Bill in the database
         List<Bill> billList = billRepository.findAll();
         assertThat(billList).hasSize(databaseSizeBeforeUpdate);
-
-        // Validate the Bill in Elasticsearch
-        verify(mockBillSearchRepository, times(0)).save(bill);
     }
 
     @Test
@@ -281,26 +253,5 @@ public class BillResourceIT {
         // Validate the database contains one less item
         List<Bill> billList = billRepository.findAll();
         assertThat(billList).hasSize(databaseSizeBeforeDelete - 1);
-
-        // Validate the Bill in Elasticsearch
-        verify(mockBillSearchRepository, times(1)).deleteById(bill.getId());
-    }
-
-    @Test
-    @Transactional
-    public void searchBill() throws Exception {
-        // Configure the mock search repository
-        // Initialize the database
-        billRepository.saveAndFlush(bill);
-        when(mockBillSearchRepository.search(queryStringQuery("id:" + bill.getId())))
-            .thenReturn(Collections.singletonList(bill));
-
-        // Search the bill
-        restBillMockMvc.perform(get("/api/_search/bills?query=id:" + bill.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(bill.getId().intValue())))
-            .andExpect(jsonPath("$.[*].placedDate").value(hasItem(DEFAULT_PLACED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 }

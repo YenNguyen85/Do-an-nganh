@@ -7,11 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.math.BigDecimal;
-
-import io.yencute.domain.enumeration.BillItemStatus;
 
 /**
  * A BillItem.
@@ -19,7 +15,6 @@ import io.yencute.domain.enumeration.BillItemStatus;
 @Entity
 @Table(name = "bill_item")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "billitem")
 public class BillItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,23 +29,13 @@ public class BillItem implements Serializable {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "total_price", precision = 21, scale = 2, nullable = false)
-    private BigDecimal totalPrice;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private BillItemStatus status;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Product product;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "billItems", allowSetters = true)
     private Bill bill;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "billItems", allowSetters = true)
-    private Product product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -74,30 +59,17 @@ public class BillItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public Product getProduct() {
+        return product;
     }
 
-    public BillItem totalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public BillItem product(Product product) {
+        this.product = product;
         return this;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public BillItemStatus getStatus() {
-        return status;
-    }
-
-    public BillItem status(BillItemStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    public void setStatus(BillItemStatus status) {
-        this.status = status;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Bill getBill() {
@@ -111,19 +83,6 @@ public class BillItem implements Serializable {
 
     public void setBill(Bill bill) {
         this.bill = bill;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public BillItem product(Product product) {
-        this.product = product;
-        return this;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -149,8 +108,6 @@ public class BillItem implements Serializable {
         return "BillItem{" +
             "id=" + getId() +
             ", quantity=" + getQuantity() +
-            ", totalPrice=" + getTotalPrice() +
-            ", status='" + getStatus() + "'" +
             "}";
     }
 }

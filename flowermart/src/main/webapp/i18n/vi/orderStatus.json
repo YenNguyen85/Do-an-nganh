@@ -2,9 +2,9 @@
   "flowermartApp": {
     "OrderStatus": {
       "null": "",
-      "COMPLETED": "COMPLETED",
-      "PENDING": "PENDING",
-      "CANCELLED": "CANCELLED"
+      "COMPLETED": "Hoàn thành",
+      "PENDING": "Đang xử lý",
+      "CANCELLED": "Đã hủy"
     }
   }
 }

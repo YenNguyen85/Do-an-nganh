@@ -47,6 +47,7 @@ describe('Product e2e test', () => {
     await promise.all([
       productUpdatePage.setNameInput('name'),
       productUpdatePage.setDescriptionInput('description'),
+      productUpdatePage.statusSelectLastOption(),
       productUpdatePage.setPriceInput('5'),
       productUpdatePage.sizeSelectLastOption(),
       productUpdatePage.setImageInput(absolutePath),

@@ -4,11 +4,15 @@ import { JhiDataUtils } from 'ng-jhipster';
 
 import { IProduct } from 'app/shared/model/product.model';
 
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
+
 @Component({
   selector: 'jhi-product-detail',
   templateUrl: './product-detail.component.html',
+  styleUrls: ['product.scss'],
 })
 export class ProductDetailComponent implements OnInit {
+  cartPlus_icon = faCartPlus;
   product: IProduct | null = null;
 
   constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}

@@ -8,15 +8,9 @@ services:
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://flowermart-postgresql:5432/flowermart
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
-      - SPRING_DATA_JEST_URI=http://flowermart-elasticsearch:9200
-      - SPRING_ELASTICSEARCH_REST_URIS=http://flowermart-elasticsearch:9200
     ports:
       - 8080:8080
   flowermart-postgresql:
     extends:
       file: postgresql.yml
       service: flowermart-postgresql
-  flowermart-elasticsearch:
-    extends:
-      file: elasticsearch.yml
-      service: flowermart-elasticsearch

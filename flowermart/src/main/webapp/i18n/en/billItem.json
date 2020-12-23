@@ -5,7 +5,6 @@
         "title": "Bill Items",
         "createLabel": "Create a new Bill Item",
         "createOrEditLabel": "Create or edit a Bill Item",
-        "search": "Search for Bill Item",
         "notFound": "No Bill Items found"
       },
       "created": "A new Bill Item is created with identifier {{ param }}",
@@ -18,10 +17,8 @@
         "title": "Bill Item"
       },
       "quantity": "Quantity",
-      "totalPrice": "Total Price",
-      "status": "Status",
-      "bill": "Bill",
-      "product": "Product"
+      "product": "Product",
+      "bill": "Bill"
     }
   }
 }

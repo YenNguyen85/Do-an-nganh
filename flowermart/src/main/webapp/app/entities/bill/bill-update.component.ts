@@ -9,8 +9,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IBill, Bill } from 'app/shared/model/bill.model';
 import { BillService } from './bill.service';
-import { ICustomer } from 'app/shared/model/customer.model';
-import { CustomerService } from 'app/entities/customer/customer.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-bill-update',
@@ -18,18 +18,18 @@ import { CustomerService } from 'app/entities/customer/customer.service';
 })
 export class BillUpdateComponent implements OnInit {
   isSaving = false;
-  customers: ICustomer[] = [];
+  users: IUser[] = [];
 
   editForm = this.fb.group({
     id: [],
     placedDate: [null, [Validators.required]],
     status: [null, [Validators.required]],
-    customer: [],
+    user: [],
   });
 
   constructor(
     protected billService: BillService,
-    protected customerService: CustomerService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -43,7 +43,7 @@ export class BillUpdateComponent implements OnInit {
 
       this.updateForm(bill);
 
-      this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
 
@@ -52,7 +52,7 @@ export class BillUpdateComponent implements OnInit {
       id: bill.id,
       placedDate: bill.placedDate ? bill.placedDate.format(DATE_TIME_FORMAT) : null,
       status: bill.status,
-      customer: bill.customer,
+      user: bill.user,
     });
   }
 
@@ -76,7 +76,7 @@ export class BillUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       placedDate: this.editForm.get(['placedDate'])!.value ? moment(this.editForm.get(['placedDate'])!.value, DATE_TIME_FORMAT) : undefined,
       status: this.editForm.get(['status'])!.value,
-      customer: this.editForm.get(['customer'])!.value,
+      user: this.editForm.get(['user'])!.value,
     };
   }
 
@@ -96,7 +96,7 @@ export class BillUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: ICustomer): any {
+  trackById(index: number, item: IUser): any {
     return item.id;
   }
 }

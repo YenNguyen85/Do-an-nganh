@@ -43,7 +43,7 @@ describe('Bill e2e test', () => {
     await promise.all([
       billUpdatePage.setPlacedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       billUpdatePage.statusSelectLastOption(),
-      billUpdatePage.customerSelectLastOption(),
+      billUpdatePage.userSelectLastOption(),
     ]);
 
     expect(await billUpdatePage.getPlacedDateInput()).to.contain(

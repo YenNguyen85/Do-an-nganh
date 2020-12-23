@@ -1,11 +1,11 @@
-id;name;description;price;size;image;image_content_type
-1;Generic Steel Tuna;../fake-data/blob/hipster.txt;53676;SPECIAL;../fake-data/blob/hipster.png;image/png
-2;cross-platform support;../fake-data/blob/hipster.txt;98666;SPECIAL;../fake-data/blob/hipster.png;image/png
-3;reboot deposit Sri Lanka Rupee;../fake-data/blob/hipster.txt;86953;NORMAL;../fake-data/blob/hipster.png;image/png
-4;Centers Steel Credit Card Account;../fake-data/blob/hipster.txt;63081;NORMAL;../fake-data/blob/hipster.png;image/png
-5;throughput;../fake-data/blob/hipster.txt;54662;SPECIAL;../fake-data/blob/hipster.png;image/png
-6;initiative green;../fake-data/blob/hipster.txt;60561;NORMAL;../fake-data/blob/hipster.png;image/png
-7;Small Wooden Bike Licensed Wooden Computer Oklahoma;../fake-data/blob/hipster.txt;95238;NORMAL;../fake-data/blob/hipster.png;image/png
-8;mobile distributed Dynamic;../fake-data/blob/hipster.txt;80377;SPECIAL;../fake-data/blob/hipster.png;image/png
-9;Personal Loan Account yellow;../fake-data/blob/hipster.txt;5182;NORMAL;../fake-data/blob/hipster.png;image/png
-10;withdrawal Rubber;../fake-data/blob/hipster.txt;86573;NORMAL;../fake-data/blob/hipster.png;image/png
+id;name;description;status;price;size;image;image_content_type
+1;Generic Steel Tuna;../fake-data/blob/hipster.txt;OUT_OF_STOCK;81236;NORMAL;../fake-data/blob/hipster.png;image/png
+2;wireless Computer;../fake-data/blob/hipster.txt;AVAILABLE;86953;NORMAL;../fake-data/blob/hipster.png;image/png
+3;Centers Steel Credit Card Account;../fake-data/blob/hipster.txt;OUT_OF_STOCK;43291;SPECIAL;../fake-data/blob/hipster.png;image/png
+4;Internal compressing;../fake-data/blob/hipster.txt;AVAILABLE;60561;NORMAL;../fake-data/blob/hipster.png;image/png
+5;Small Wooden Bike Licensed Wooden Computer Oklahoma;../fake-data/blob/hipster.txt;OUT_OF_STOCK;80588;SPECIAL;../fake-data/blob/hipster.png;image/png
+6;COM Personal Loan Account yellow;../fake-data/blob/hipster.txt;AVAILABLE;27546;NORMAL;../fake-data/blob/hipster.png;image/png
+7;CSS Liaison;../fake-data/blob/hipster.txt;AVAILABLE;88935;SPECIAL;../fake-data/blob/hipster.png;image/png
+8;methodical;../fake-data/blob/hipster.txt;OUT_OF_STOCK;57905;SPECIAL;../fake-data/blob/hipster.png;image/png
+9;Fantastic;../fake-data/blob/hipster.txt;OUT_OF_STOCK;25082;NORMAL;../fake-data/blob/hipster.png;image/png
+10;Harbors backing up;../fake-data/blob/hipster.txt;AVAILABLE;6953;SPECIAL;../fake-data/blob/hipster.png;image/png

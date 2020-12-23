@@ -1,10 +1,10 @@
-<div>
+<div class="my-3">
     <h2 id="page-heading">
         <span jhiTranslate="flowermartApp.newsAndEvent.home.title">News And Events</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-news-and-event" [routerLink]="['/news-and-event/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="flowermartApp.newsAndEvent.home.createLabel">
+            <span  jhiTranslate="flowermartApp.newsAndEvent.home.createLabel">
             Create a new News And Event
             </span>
         </button>
@@ -13,24 +13,6 @@
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'flowermartApp.newsAndEvent.home.search' | translate }}">
-
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon icon="search"></fa-icon>
-                    </button>
-
-                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
-                        <fa-icon icon="trash-alt"></fa-icon>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="newsAndEvents?.length === 0">
         <span jhiTranslate="flowermartApp.newsAndEvent.home.notFound">No newsAndEvents found</span>

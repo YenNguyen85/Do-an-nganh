@@ -4,7 +4,7 @@
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bill" [routerLink]="['/bill/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="flowermartApp.bill.home.createLabel">
+            <span  jhiTranslate="flowermartApp.bill.home.createLabel">
             Create a new Bill
             </span>
         </button>
@@ -13,24 +13,6 @@
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'flowermartApp.bill.home.search' | translate }}">
-
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon icon="search"></fa-icon>
-                    </button>
-
-                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
-                        <fa-icon icon="trash-alt"></fa-icon>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="bills?.length === 0">
         <span jhiTranslate="flowermartApp.bill.home.notFound">No bills found</span>
@@ -43,7 +25,7 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.bill.placedDate">Placed Date</span></th>
                     <th scope="col" ><span jhiTranslate="flowermartApp.bill.status">Status</span></th>
-                    <th scope="col" ><span jhiTranslate="flowermartApp.bill.customer">Customer</span></th>
+                    <th scope="col" ><span jhiTranslate="flowermartApp.bill.user">User</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -53,9 +35,7 @@
                     <td>{{ bill.placedDate | date:'medium' }}</td>
                     <td jhiTranslate="{{ 'flowermartApp.OrderStatus.' + bill.status }}">{{ bill.status }}</td>
                     <td>
-                        <div *ngIf="bill.customer">
-                            <a [routerLink]="['/customer', bill.customer?.id, 'view']" >{{ bill.customer?.id }}</a>
-                        </div>
+                        {{ bill.user?.email }}
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

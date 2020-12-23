@@ -6,6 +6,7 @@ buildscript {
         maven { url "https://repo.spring.io/plugins-release" }
     }
     dependencies {
+        classpath "gradle.plugin.com.heroku.sdk:heroku-gradle:1.0.4"
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
     }
 }
@@ -39,6 +40,7 @@ assert System.properties["java.specification.version"] == "1.8" || "11" || "12" 
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
+apply from: 'gradle/heroku.gradle'
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
 if (project.hasProperty("prod") || project.hasProperty("gae")) {
@@ -236,14 +238,6 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-aop"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
-    // Spring Data Jest dependencies for Elasticsearch
-    implementation ("com.github.vanroy:spring-boot-starter-data-jest") {
-        exclude module: "commons-logging"
-    }
-    // log4j2-mock needed to create embedded elasticsearch instance with SLF4J
-    runtimeOnly "de.dentrassi.elasticsearch:log4j2-mock:${log4j2_mock_version}"
-    // end of Spring Data Jest dependencies
     testImplementation "org.testcontainers:postgresql"
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation ("org.springframework.boot:spring-boot-starter-web") {
@@ -283,6 +277,8 @@ dependencies {
     testImplementation "com.tngtech.archunit:archunit-junit5-api:${archunit_junit5_version}"
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunit_junit5_version}"
     testImplementation "com.h2database:h2"
+    implementation "org.springframework.cloud:spring-cloud-localconfig-connector"
+    implementation "org.springframework.cloud:spring-cloud-heroku-connector"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

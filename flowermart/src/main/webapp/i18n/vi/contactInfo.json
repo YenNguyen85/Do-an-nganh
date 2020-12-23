@@ -5,7 +5,6 @@
         "title": "Contact Infos",
         "createLabel": "Thêm mới một Contact Info",
         "createOrEditLabel": "Thêm mới hoặc cập nhật Contact Info",
-        "search": "Tìm Contact Info",
         "notFound": "No Contact Infos found"
       },
       "created": "Một Contact Info mới được tạo với định danh {{ param }}",

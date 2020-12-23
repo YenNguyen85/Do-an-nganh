@@ -4,7 +4,7 @@
       "packageName": "io.yencute",
       "nativeLanguage": "vi"
     },
-    "jhipsterVersion": "6.10.4",
+    "jhipsterVersion": "6.10.5",
     "applicationType": "monolith",
     "baseName": "flowermart",
     "packageName": "io.yencute",
@@ -17,19 +17,19 @@
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "prodDatabaseType": "postgresql",
-    "searchEngine": "elasticsearch",
+    "searchEngine": false,
     "messageBroker": false,
     "serviceDiscoveryType": false,
     "buildTool": "gradle",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "YTM4ZTQ5NmQ2ZTI3YTcxNTRjMDM3ZTljODNhOGViZjU2N2ZjNDI1MTg5MGNjZDUzM2E0MDI3NGI4OTYyNDcxZjc2NmVmYjZkYjdmZjM0ODk5ZWJkZjdjMzc0YmJiMjgyN2NiYzZiODZkNWYzMDVlNzViZmUzZjExMmJkYmE5NzA=",
+    "jwtSecretKey": "OWZjMDRjNWRiMDZmOGMzZTkyMWVhNjUzNTlkY2EyMWY5MDBlMmY4Y2RkZjRlZjU5MzY5YzIwY2M1ZGM5ZDJmNGJkNmMwZTcwZGMzODk2ZDM2N2Y0ZWE3OGVhMmUyMGIyMDU0YjJkZjIyNjY4YWE5NGUwMThmOGYwMTY1ZTQzYjY=",
     "embeddableLaunchScript": false,
     "useSass": true,
     "clientPackageManager": "npm",
     "clientFramework": "angularX",
     "clientTheme": "flatly",
     "clientThemeVariant": "primary",
-    "creationTimestamp": 1604740451746,
+    "creationTimestamp": 1605272666948,
     "testFrameworks": ["protractor"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
@@ -38,6 +38,9 @@
     "enableTranslation": true,
     "nativeLanguage": "vi",
     "languages": ["vi", "en"],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "flowermart",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }

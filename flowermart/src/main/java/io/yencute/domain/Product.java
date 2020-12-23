@@ -7,11 +7,12 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+
+import io.yencute.domain.enumeration.ProductStatus;
 
 import io.yencute.domain.enumeration.Size;
 
@@ -21,7 +22,6 @@ import io.yencute.domain.enumeration.Size;
 @Entity
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "product")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +41,11 @@ public class Product implements Serializable {
     private String description;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private ProductStatus status;
+
+    @NotNull
     @DecimalMin(value = "0")
     @Column(name = "price", precision = 21, scale = 2, nullable = false)
     private BigDecimal price;
@@ -56,10 +61,6 @@ public class Product implements Serializable {
 
     @Column(name = "image_content_type")
     private String imageContentType;
-
-    @OneToMany(mappedBy = "product")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BillItem> billItems = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -101,6 +102,19 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public Product status(ProductStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
     }
 
     public BigDecimal getPrice() {
@@ -155,31 +169,6 @@ public class Product implements Serializable {
         this.imageContentType = imageContentType;
     }
 
-    public Set<BillItem> getBillItems() {
-        return billItems;
-    }
-
-    public Product billItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
-        return this;
-    }
-
-    public Product addBillItem(BillItem billItem) {
-        this.billItems.add(billItem);
-        billItem.setProduct(this);
-        return this;
-    }
-
-    public Product removeBillItem(BillItem billItem) {
-        this.billItems.remove(billItem);
-        billItem.setProduct(null);
-        return this;
-    }
-
-    public void setBillItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
-    }
-
     public Set<Category> getCategories() {
         return categories;
     }
@@ -229,6 +218,7 @@ public class Product implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", status='" + getStatus() + "'" +
             ", price=" + getPrice() +
             ", size='" + getSize() + "'" +
             ", image='" + getImage() + "'" +

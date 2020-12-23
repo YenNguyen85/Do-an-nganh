@@ -81,6 +81,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
+            .antMatchers("/api/products/**").permitAll() // Cấp quyền truy cập product khi không đăng nhập
+            .antMatchers("/api/categories/**").permitAll() // Cấp quyền truy cập categories khi không đăng nhập
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()

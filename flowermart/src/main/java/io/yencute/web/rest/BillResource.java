@@ -2,7 +2,6 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.Bill;
 import io.yencute.repository.BillRepository;
-import io.yencute.repository.search.BillSearchRepository;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,10 +18,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link io.yencute.domain.Bill}.
@@ -41,11 +36,8 @@ public class BillResource {
 
     private final BillRepository billRepository;
 
-    private final BillSearchRepository billSearchRepository;
-
-    public BillResource(BillRepository billRepository, BillSearchRepository billSearchRepository) {
+    public BillResource(BillRepository billRepository) {
         this.billRepository = billRepository;
-        this.billSearchRepository = billSearchRepository;
     }
 
     /**
@@ -62,7 +54,6 @@ public class BillResource {
             throw new BadRequestAlertException("A new bill cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Bill result = billRepository.save(bill);
-        billSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/bills/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -84,7 +75,6 @@ public class BillResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Bill result = billRepository.save(bill);
-        billSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bill.getId().toString()))
             .body(result);
@@ -124,22 +114,6 @@ public class BillResource {
     public ResponseEntity<Void> deleteBill(@PathVariable Long id) {
         log.debug("REST request to delete Bill : {}", id);
         billRepository.deleteById(id);
-        billSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * {@code SEARCH  /_search/bills?query=:query} : search for the bill corresponding
-     * to the query.
-     *
-     * @param query the query of the bill search.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/bills")
-    public List<Bill> searchBills(@RequestParam String query) {
-        log.debug("REST request to search Bills for query {}", query);
-        return StreamSupport
-            .stream(billSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
     }
 }

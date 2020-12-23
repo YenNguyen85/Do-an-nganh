@@ -5,7 +5,6 @@
         "title": "News And Events",
         "createLabel": "Create a new News And Event",
         "createOrEditLabel": "Create or edit a News And Event",
-        "search": "Search for News And Event",
         "notFound": "No News And Events found"
       },
       "created": "A new News And Event is created with identifier {{ param }}",

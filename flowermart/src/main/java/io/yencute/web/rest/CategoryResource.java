@@ -2,7 +2,6 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.Category;
 import io.yencute.repository.CategoryRepository;
-import io.yencute.repository.search.CategorySearchRepository;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,10 +18,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link io.yencute.domain.Category}.
@@ -41,11 +36,8 @@ public class CategoryResource {
 
     private final CategoryRepository categoryRepository;
 
-    private final CategorySearchRepository categorySearchRepository;
-
-    public CategoryResource(CategoryRepository categoryRepository, CategorySearchRepository categorySearchRepository) {
+    public CategoryResource(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.categorySearchRepository = categorySearchRepository;
     }
 
     /**
@@ -62,7 +54,6 @@ public class CategoryResource {
             throw new BadRequestAlertException("A new category cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Category result = categoryRepository.save(category);
-        categorySearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/categories/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -84,7 +75,6 @@ public class CategoryResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Category result = categoryRepository.save(category);
-        categorySearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, category.getId().toString()))
             .body(result);
@@ -124,22 +114,6 @@ public class CategoryResource {
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);
         categoryRepository.deleteById(id);
-        categorySearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * {@code SEARCH  /_search/categories?query=:query} : search for the category corresponding
-     * to the query.
-     *
-     * @param query the query of the category search.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/categories")
-    public List<Category> searchCategories(@RequestParam String query) {
-        log.debug("REST request to search Categories for query {}", query);
-        return StreamSupport
-            .stream(categorySearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
     }
 }

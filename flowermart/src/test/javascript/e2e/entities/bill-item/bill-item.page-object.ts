@@ -30,11 +30,9 @@ export class BillItemUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   quantityInput = element(by.id('field_quantity'));
-  totalPriceInput = element(by.id('field_totalPrice'));
-  statusSelect = element(by.id('field_status'));
 
-  billSelect = element(by.id('field_bill'));
   productSelect = element(by.id('field_product'));
+  billSelect = element(by.id('field_bill'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -46,42 +44,6 @@ export class BillItemUpdatePage {
 
   async getQuantityInput(): Promise<string> {
     return await this.quantityInput.getAttribute('value');
-  }
-
-  async setTotalPriceInput(totalPrice: string): Promise<void> {
-    await this.totalPriceInput.sendKeys(totalPrice);
-  }
-
-  async getTotalPriceInput(): Promise<string> {
-    return await this.totalPriceInput.getAttribute('value');
-  }
-
-  async setStatusSelect(status: string): Promise<void> {
-    await this.statusSelect.sendKeys(status);
-  }
-
-  async getStatusSelect(): Promise<string> {
-    return await this.statusSelect.element(by.css('option:checked')).getText();
-  }
-
-  async statusSelectLastOption(): Promise<void> {
-    await this.statusSelect.all(by.tagName('option')).last().click();
-  }
-
-  async billSelectLastOption(): Promise<void> {
-    await this.billSelect.all(by.tagName('option')).last().click();
-  }
-
-  async billSelectOption(option: string): Promise<void> {
-    await this.billSelect.sendKeys(option);
-  }
-
-  getBillSelect(): ElementFinder {
-    return this.billSelect;
-  }
-
-  async getBillSelectedOption(): Promise<string> {
-    return await this.billSelect.element(by.css('option:checked')).getText();
   }
 
   async productSelectLastOption(): Promise<void> {
@@ -98,6 +60,22 @@ export class BillItemUpdatePage {
 
   async getProductSelectedOption(): Promise<string> {
     return await this.productSelect.element(by.css('option:checked')).getText();
+  }
+
+  async billSelectLastOption(): Promise<void> {
+    await this.billSelect.all(by.tagName('option')).last().click();
+  }
+
+  async billSelectOption(option: string): Promise<void> {
+    await this.billSelect.sendKeys(option);
+  }
+
+  getBillSelect(): ElementFinder {
+    return this.billSelect;
+  }
+
+  async getBillSelectedOption(): Promise<string> {
+    return await this.billSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

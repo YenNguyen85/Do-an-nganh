@@ -2,7 +2,6 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.NewsAndEvent;
 import io.yencute.repository.NewsAndEventRepository;
-import io.yencute.repository.search.NewsAndEventSearchRepository;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -19,10 +18,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing {@link io.yencute.domain.NewsAndEvent}.
@@ -41,11 +36,8 @@ public class NewsAndEventResource {
 
     private final NewsAndEventRepository newsAndEventRepository;
 
-    private final NewsAndEventSearchRepository newsAndEventSearchRepository;
-
-    public NewsAndEventResource(NewsAndEventRepository newsAndEventRepository, NewsAndEventSearchRepository newsAndEventSearchRepository) {
+    public NewsAndEventResource(NewsAndEventRepository newsAndEventRepository) {
         this.newsAndEventRepository = newsAndEventRepository;
-        this.newsAndEventSearchRepository = newsAndEventSearchRepository;
     }
 
     /**
@@ -62,7 +54,6 @@ public class NewsAndEventResource {
             throw new BadRequestAlertException("A new newsAndEvent cannot already have an ID", ENTITY_NAME, "idexists");
         }
         NewsAndEvent result = newsAndEventRepository.save(newsAndEvent);
-        newsAndEventSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/news-and-events/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -84,7 +75,6 @@ public class NewsAndEventResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         NewsAndEvent result = newsAndEventRepository.save(newsAndEvent);
-        newsAndEventSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, newsAndEvent.getId().toString()))
             .body(result);
@@ -124,22 +114,6 @@ public class NewsAndEventResource {
     public ResponseEntity<Void> deleteNewsAndEvent(@PathVariable Long id) {
         log.debug("REST request to delete NewsAndEvent : {}", id);
         newsAndEventRepository.deleteById(id);
-        newsAndEventSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    /**
-     * {@code SEARCH  /_search/news-and-events?query=:query} : search for the newsAndEvent corresponding
-     * to the query.
-     *
-     * @param query the query of the newsAndEvent search.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/news-and-events")
-    public List<NewsAndEvent> searchNewsAndEvents(@RequestParam String query) {
-        log.debug("REST request to search NewsAndEvents for query {}", query);
-        return StreamSupport
-            .stream(newsAndEventSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
     }
 }

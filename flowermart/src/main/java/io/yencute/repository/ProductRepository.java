@@ -26,4 +26,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select product from Product product left join fetch product.categories where product.id =:id")
     Optional<Product> findOneWithEagerRelationships(@Param("id") Long id);
+
+    List<Product> findAllByCategories_Id(@Param("id") Long id);
+
+    List<Product> findAllByNameContainingIgnoreCase(@Param("name") String name);
 }

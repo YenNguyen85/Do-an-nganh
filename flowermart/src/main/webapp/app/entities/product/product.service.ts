@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption, Search } from 'app/shared/util/request-util';
+import { createRequestOption } from 'app/shared/util/request-util';
 import { IProduct } from 'app/shared/model/product.model';
 
 type EntityResponseType = HttpResponse<IProduct>;
@@ -12,7 +12,6 @@ type EntityArrayResponseType = HttpResponse<IProduct[]>;
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   public resourceUrl = SERVER_API_URL + 'api/products';
-  public resourceSearchUrl = SERVER_API_URL + 'api/_search/products';
 
   constructor(protected http: HttpClient) {}
 
@@ -37,8 +36,11 @@ export class ProductService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  search(req: Search): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
-    return this.http.get<IProduct[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
+  findByCategoriesId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IProduct[]>(`${this.resourceUrl}/category/${id}`, { observe: 'response' });
+  }
+
+  findByNameContaining(keyword: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IProduct[]>(`${this.resourceUrl}/search/${keyword}`, { observe: 'response' });
   }
 }

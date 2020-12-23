@@ -13,8 +13,8 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./news-and-event/news-and-event.module').then(m => m.FlowermartNewsAndEventModule),
       },
       {
-        path: 'customer',
-        loadChildren: () => import('./customer/customer.module').then(m => m.FlowermartCustomerModule),
+        path: 'info-customer',
+        loadChildren: () => import('./info-customer/info-customer.module').then(m => m.FlowermartInfoCustomerModule),
       },
       {
         path: 'product',

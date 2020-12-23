@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,37 +15,16 @@ import { CategoryDeleteDialogComponent } from './category-delete-dialog.componen
 export class CategoryComponent implements OnInit, OnDestroy {
   categories?: ICategory[];
   eventSubscriber?: Subscription;
-  currentSearch: string;
 
   constructor(
     protected categoryService: CategoryService,
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal,
-    protected activatedRoute: ActivatedRoute
-  ) {
-    this.currentSearch =
-      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
-        ? this.activatedRoute.snapshot.queryParams['search']
-        : '';
-  }
+    protected modalService: NgbModal
+  ) {}
 
   loadAll(): void {
-    if (this.currentSearch) {
-      this.categoryService
-        .search({
-          query: this.currentSearch,
-        })
-        .subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
-      return;
-    }
-
     this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
-  }
-
-  search(query: string): void {
-    this.currentSearch = query;
-    this.loadAll();
   }
 
   ngOnInit(): void {

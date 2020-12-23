@@ -2,9 +2,9 @@
   "flowermartApp": {
     "Gender": {
       "null": "",
-      "MALE": "MALE",
-      "FEMALE": "FEMALE",
-      "OTHER": "OTHER"
+      "MALE": "Nam",
+      "FEMALE": "Nữ",
+      "OTHER": "Giới tính khác"
     }
   }
 }

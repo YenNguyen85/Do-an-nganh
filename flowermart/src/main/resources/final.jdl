@@ -1,0 +1,79 @@
+enum Gender {
+	MALE, FEMALE, OTHER
+}
+
+entity ContactInfo {
+	email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    phone String required
+}
+
+entity NewsAndEvent {
+	title String required
+    content TextBlob
+    time Instant
+}
+
+entity InfoCustomer {
+    gender Gender required
+    phone String required
+    addressLine1 String required
+    addressLine2 String
+    city String required
+    country String required
+}
+
+enum Size {
+    NORMAL, SPECIAL
+}
+
+entity Product {
+	name String required
+    description TextBlob
+    status ProductStatus required
+    price BigDecimal required min(0)
+    size Size required
+    image ImageBlob
+}
+
+entity Category {
+	name String required
+    description TextBlob required
+}
+
+enum OrderStatus {
+    COMPLETED, PENDING, CANCELLED
+}
+
+entity Bill {
+	placedDate Instant required
+    status OrderStatus required
+}
+
+enum ProductStatus {
+    AVAILABLE, OUT_OF_STOCK
+}
+
+entity BillItem {
+	quantity Integer required min(0)
+}
+
+relationship OneToOne {
+	InfoCustomer{user(login)} to User
+    BillItem{product(name)} to Product
+}
+
+relationship ManyToMany {
+	Product{Category(name)} to Category{product}
+}
+
+// relationship OneToMany {
+//     //Bill{billItem} to BillItem{bill}
+
+// }
+
+relationship ManyToOne {
+    Bill{user(email)} to User
+    BillItem{bill} to Bill
+}
+
+

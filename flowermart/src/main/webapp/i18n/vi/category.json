@@ -2,24 +2,23 @@
   "flowermartApp": {
     "category": {
       "home": {
-        "title": "Categories",
-        "createLabel": "Thêm mới một Category",
-        "createOrEditLabel": "Thêm mới hoặc cập nhật Category",
-        "search": "Tìm Category",
-        "notFound": "No Categories found"
+        "title": "Danh mục",
+        "createLabel": "Thêm mới một loại sản phẩm",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật loại sản phẩm",
+        "notFound": "Không tìm thấy loại sản phẩm này"
       },
-      "created": "Một Category mới được tạo với định danh {{ param }}",
-      "updated": "Một Category cập nhật với định danh {{ param }}",
-      "deleted": "Một Category đã xóa với định danh {{ param }}",
+      "created": "Một loại sản phẩm mới được tạo với định danh {{ param }}",
+      "updated": "Một loại sản phẩm cập nhật với định danh {{ param }}",
+      "deleted": "Một loại sản phẩm đã xóa với định danh {{ param }}",
       "delete": {
-        "question": "Bạn có chắc là muốn xóa Category {{ id }}?"
+        "question": "Bạn có chắc là muốn xóa loại sản phẩm {{ id }}?"
       },
       "detail": {
-        "title": "Category"
+        "title": "loại sản phẩm"
       },
-      "name": "Name",
-      "description": "Description",
-      "product": "Product"
+      "name": "Tên loại",
+      "description": "Mô tả",
+      "product": "Sản phẩm"
     }
   }
 }

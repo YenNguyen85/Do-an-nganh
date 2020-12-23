@@ -5,7 +5,6 @@
         "title": "News And Events",
         "createLabel": "Thêm mới một News And Event",
         "createOrEditLabel": "Thêm mới hoặc cập nhật News And Event",
-        "search": "Tìm News And Event",
         "notFound": "No News And Events found"
       },
       "created": "Một News And Event mới được tạo với định danh {{ param }}",

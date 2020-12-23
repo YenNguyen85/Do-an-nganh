@@ -7,11 +7,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 import io.yencute.domain.enumeration.OrderStatus;
 
@@ -21,7 +18,6 @@ import io.yencute.domain.enumeration.OrderStatus;
 @Entity
 @Table(name = "bill")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "bill")
 public class Bill implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,13 +36,9 @@ public class Bill implements Serializable {
     @Column(name = "status", nullable = false)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "bill")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BillItem> billItems = new HashSet<>();
-
     @ManyToOne
     @JsonIgnoreProperties(value = "bills", allowSetters = true)
-    private Customer customer;
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -83,42 +75,17 @@ public class Bill implements Serializable {
         this.status = status;
     }
 
-    public Set<BillItem> getBillItems() {
-        return billItems;
+    public User getUser() {
+        return user;
     }
 
-    public Bill billItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
+    public Bill user(User user) {
+        this.user = user;
         return this;
     }
 
-    public Bill addBillItem(BillItem billItem) {
-        this.billItems.add(billItem);
-        billItem.setBill(this);
-        return this;
-    }
-
-    public Bill removeBillItem(BillItem billItem) {
-        this.billItems.remove(billItem);
-        billItem.setBill(null);
-        return this;
-    }
-
-    public void setBillItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public Bill customer(Customer customer) {
-        this.customer = customer;
-        return this;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

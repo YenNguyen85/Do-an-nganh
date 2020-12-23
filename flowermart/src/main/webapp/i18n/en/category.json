@@ -5,7 +5,6 @@
         "title": "Categories",
         "createLabel": "Create a new Category",
         "createOrEditLabel": "Create or edit a Category",
-        "search": "Search for Category",
         "notFound": "No Categories found"
       },
       "created": "A new Category is created with identifier {{ param }}",

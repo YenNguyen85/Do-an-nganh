@@ -1,0 +1,9 @@
+{
+  "flowermartApp": {
+    "ProductStatus": {
+      "null": "",
+      "AVAILABLE": "Hiện có",
+      "OUT_OF_STOCK": "Hết hàng"
+    }
+  }
+}

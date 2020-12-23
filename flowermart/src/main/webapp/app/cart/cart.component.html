@@ -1,0 +1,107 @@
+<div class="wrap cf">
+    <h1 class="projTitle">Shopping Cart<span>-yencute</span></h1>
+    <div class="heading cf">
+        <h1>My Cart</h1>
+        <a routerLink="/" class="continue">Continue Shopping</a>
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
+        <span jhiTranslate="flowermartApp.billItem.home.notFound">No billItems found</span>
+    </div>
+    <br>
+    <div class="cart">
+        <ul class="cartWrap" *ngIf="products && products.length > 0">
+            <li class="items" *ngFor="let product of products">
+                <div class="infoWrap">
+                    <div class="cartSection">
+                        <div *ngIf="product.image">
+                            <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 30px;" alt="product image"/>
+                        </div>
+
+                        <h3>{{product.name}}</h3>
+
+                        <p> <input type="text" class="qty" [placeholder]="1" /></p>
+
+                        <p class="stockStatus">AVAILABLE</p>
+                    </div>
+
+                    <div class="prodTotal cartSection">
+                        <p>{{product.price |currency:"VND":"symbol"}}</p>
+                    </div>
+
+                    <div class="cartSection removeWrap">
+                        <a (click)="delete(product)" class="remove">x</a>
+                    </div>
+                </div>
+            </li>
+            <!-- <li class="items" *ngFor="let billItem of billItems">
+                <div class="infoWrap">
+                    <div class="cartSection">
+                        <img [src]="'data:' + billItem.product.imageContentType + ';base64,' + billItem.product.image" style="max-height: 30px;" alt="product image"/>
+
+                        <h3>{{billItem.product.name}}</h3>
+
+                        <p> <input type="text" class="qty" [placeholder]="billItem.quantity" [(ngModel)]="billItem.quantity"/></p>
+
+                        <p class="stockStatus">{{billItem.status}}</p>
+                    </div>
+
+                    <div class="prodTotal cartSection">
+                        <p>{{billItem.product.price |currency:"VND":"symbol"}}</p>
+                    </div>
+
+                    <div class="cartSection removeWrap">
+                        <a (click)="delete(billItem)" class="remove">x</a>
+                    </div>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+
+    <!-- <div class="cart" *ngIf="bill !== undefined">
+
+        <button (click)="loadBillItem(bill)">update</button>
+
+        <ul class="cartWrap" *ngIf="billItems && billItems.length > 0">
+            <li class="items odd" *ngFor="let billItem of billItems">
+                <div class="infoWrap">
+                    <div class="cartSection">
+                        <img [src]="'data:' + billItem.product?.imageContentType + ';base64,' + billItem.product?.image" style="max-height: 30px;" alt="product image"/>
+
+                        <h3>{{billItem.product?.name}}</h3>
+
+                        <p> <input type="text" class="qty" [placeholder]="billItem.quantity" [(ngModel)]="billItem.quantity"/></p>
+
+                        <p class="stockStatus">{{billItem.status}}</p>
+                    </div>
+
+                    <div class="prodTotal cartSection">
+                        <p>{{billItem.product?.price |currency:"VND":"symbol"}}</p>
+                    </div>
+
+                    <div class="cartSection removeWrap">
+                        <a (click)="delete(billItem)" class="remove">x</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div> -->
+
+    <div class="promoCode">
+        <label for="promo">Have A Promo Code?</label>
+        <input type="text" name="promo" placholder="Enter Code" />
+        <a href="#" class="btn"></a>
+    </div>
+
+    <div class="subtotal cf">
+        <ul style="list-style-type:none">
+            <li class="totalRow final"><span class="label">Total</span><span class="value"></span></li>
+            <li class="totalRow"><a href="#" class="btn continue">Checkout</a></li>
+        </ul>
+    </div>
+</div>

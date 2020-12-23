@@ -1,0 +1,28 @@
+{
+  "flowermartApp": {
+    "infoCustomer": {
+      "home": {
+        "title": "Thông tin khách hàng",
+        "createLabel": "Thêm mới một khách hàng",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật thông tin khách hàng",
+        "notFound": "No Info Customers found"
+      },
+      "created": "Một Info Customer mới được tạo với định danh {{ param }}",
+      "updated": "Một Info Customer cập nhật với định danh {{ param }}",
+      "deleted": "Một Info Customer đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa thông tin khách hàng {{ id }}?"
+      },
+      "detail": {
+        "title": "Thông tin khách hàng"
+      },
+      "gender": "Giới tính:",
+      "phone": "Số điện thoại:",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "city": "Thành phố:",
+      "country": "Tỉnh thành:",
+      "user": "User"
+    }
+  }
+}

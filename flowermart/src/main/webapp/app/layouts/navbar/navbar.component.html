@@ -1,11 +1,13 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary">
+<nav class="navbar navbar-dark navbar-expand-md bg-darkly">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
-        <span jhiTranslate="global.title" class="navbar-title">Flowermart</span> <span class="navbar-version">{{ version }}</span>
+        <span jhiTranslate="global.title" class="navbar-title" style="font-family: 'Yellowtail', cursive; font-size: 1.2em;">Flowermart</span> <span class="navbar-version">{{ version }}</span>
     </a>
+
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>
+
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -40,9 +42,9 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="customer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="info-customer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.customer">Customer</span>
+                            <span jhiTranslate="global.menu.entities.infoCustomer">Info Customer</span>
                         </a>
                     </li>
                     <li>
@@ -69,6 +71,7 @@
                             <span jhiTranslate="global.menu.entities.billItem">Bill Item</span>
                         </a>
                     </li>
+
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
@@ -182,6 +185,15 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <!-- thêm giỏ hàng -->
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="/cart" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon [icon]="cart_icon"></fa-icon>
+                        <span jhiTranslate="global.menu.cart">Cart</span>
+                    </span>
+                </a>
             </li>
         </ul>
     </div>
