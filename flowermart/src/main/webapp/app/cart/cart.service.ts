@@ -15,23 +15,45 @@ type EntityArrayResponseType = HttpResponse<IBillItem[]>;
   providedIn: 'root',
 })
 export class CartService {
-  cart: IProduct[] = [];
+  cart: IBillItem[] = [];
 
   public billUrl = SERVER_API_URL + 'api/bills';
   public billItemUrl = SERVER_API_URL + 'api/bill-items';
 
   constructor(protected http: HttpClient) {}
 
-  addToCart(product: IProduct): void {
-    //window.alert(`Đã thêm sản phẩm ${product.name} vào giỏ hàng`)
-    if (this.cart.includes(product) === false) this.cart.push(product);
+  /**
+   * Hàm kiểm tra sản phẩm có tồn tại trong giỏ chưa
+   * @param product
+   * @returns billItem chứa product đó
+   */
+  checkProductExists(product: IProduct): IBillItem | undefined {
+    return this.cart.find(item => item.product === product);
   }
 
-  getCart(): Observable<IProduct[]> {
+  /**
+   * Hàm thêm sản phẩm vào giỏ hàng
+   * @param product sản phẩm cần thêm vào giỏ
+   */
+  addToCart(product: IProduct): void {
+    const item = this.checkProductExists(product);
+    if (item === undefined) {
+      window.alert(`Đã thêm sản phẩm ${product.name} vào giỏ hàng`);
+      const billItem: IBillItem = { product, quantity: 1 };
+      this.cart.push(billItem);
+    } else {
+      window.alert(`Đã tăng số lượng sản phẩm ${product.name} vào giỏ hàng`);
+      const index = this.cart.indexOf(item);
+      item.quantity = item.quantity! + 1;
+      this.cart.splice(index, 1, item);
+    }
+  }
+
+  getCart(): Observable<IBillItem[]> {
     return of(this.cart);
   }
 
-  clearCart(): IProduct[] {
+  clearCart(): IBillItem[] {
     this.cart = [];
     return this.cart;
   }

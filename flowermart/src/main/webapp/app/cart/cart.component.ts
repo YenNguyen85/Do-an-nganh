@@ -20,8 +20,6 @@ export class CartComponent implements OnInit {
 
   billItems: IBillItem[] = []; // Khởi tạo biến lưu danh sách bill item
 
-  products: IProduct[] = [];
-
   eventSubscriber?: Subscription;
 
   constructor(protected cartService: CartService, protected modalService: NgbModal) {}
@@ -31,9 +29,18 @@ export class CartComponent implements OnInit {
   }
 
   loadAll(): void {
-    this.cartService.getCart().subscribe(res => (this.products = res));
+    this.cartService.getCart().subscribe(res => (this.billItems = res));
+
     // eslint-disable-next-line
     //this.cartService.getCart().subscribe((res: HttpResponse<IBill>) => this.bill = res.body || undefined );
+  }
+
+  loadTotalPrice(): number {
+    let totalPrice = 0;
+    this.billItems.forEach(item => {
+      totalPrice = totalPrice + item.quantity! * item.product?.price!;
+    });
+    return totalPrice;
   }
 
   loadBillItem(bill: IBill): void {
@@ -42,8 +49,8 @@ export class CartComponent implements OnInit {
     }
   }
 
-  delete(product: IProduct): void {
-    this.products = this.products.filter(value => value !== product);
+  delete(item: IBillItem): void {
+    this.billItems = this.billItems.filter(value => value !== item);
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBill>>): void {
