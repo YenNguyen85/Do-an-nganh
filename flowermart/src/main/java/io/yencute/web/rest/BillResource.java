@@ -64,6 +64,12 @@ public class BillResource {
             .body(result);
     }
 
+    /**
+     * {@code POST /bill/save-bill} : Create a new bill with list bill items
+     *
+     * @param billDTO the bill and the bill item list in bill
+     * @throws URISyntaxException
+     */
     @PostMapping("/bills/save-bill")
     public void checkout(@Valid @RequestBody BillDTO billDTO) throws URISyntaxException {
         log.debug("REST request to save BillDTO : {}", billDTO);

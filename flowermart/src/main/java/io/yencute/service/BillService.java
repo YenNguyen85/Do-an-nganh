@@ -20,14 +20,19 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
+    /**
+     *  Lưu bill và bill item vào database
+     * @param billDTO
+     */
     public void saveCheckout(BillDTO billDTO){
-        Bill curBill = new Bill();
-        curBill.setStatus(billDTO.getStatus());
-        curBill.setPlacedDate(billDTO.getPlacedDate());
-        billRepository.save(curBill);
+        Bill bill = new Bill();
+        bill.setStatus(billDTO.getStatus());
+        bill.setPlacedDate(billDTO.getPlacedDate());
+        Bill curBill = billRepository.save(bill);
 
         List<BillItem> billItems = billDTO.getBillItems();
         for (BillItem item: billItems) {
+            item.setBill(curBill);
             billItemRepository.save(item);
         }
     }
