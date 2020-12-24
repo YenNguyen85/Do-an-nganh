@@ -17,8 +17,8 @@
         "title": "Bill Item"
       },
       "quantity": "Quantity",
-      "product": "Product",
-      "bill": "Bill"
+      "bill": "Bill",
+      "product": "Product"
     }
   }
 }

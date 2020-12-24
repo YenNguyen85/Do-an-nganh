@@ -59,7 +59,6 @@ entity BillItem {
 
 relationship OneToOne {
 	InfoCustomer{user(login)} to User
-    BillItem{product(name)} to Product
 }
 
 relationship ManyToMany {
@@ -69,6 +68,7 @@ relationship ManyToMany {
 relationship ManyToOne {
     Bill{user(email)} to User
     BillItem{bill} to Bill
+    BillItem{product(name)} to Product
 }
 
 

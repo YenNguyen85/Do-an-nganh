@@ -31,8 +31,8 @@ export class BillItemUpdatePage {
 
   quantityInput = element(by.id('field_quantity'));
 
-  productSelect = element(by.id('field_product'));
   billSelect = element(by.id('field_bill'));
+  productSelect = element(by.id('field_product'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -44,22 +44,6 @@ export class BillItemUpdatePage {
 
   async getQuantityInput(): Promise<string> {
     return await this.quantityInput.getAttribute('value');
-  }
-
-  async productSelectLastOption(): Promise<void> {
-    await this.productSelect.all(by.tagName('option')).last().click();
-  }
-
-  async productSelectOption(option: string): Promise<void> {
-    await this.productSelect.sendKeys(option);
-  }
-
-  getProductSelect(): ElementFinder {
-    return this.productSelect;
-  }
-
-  async getProductSelectedOption(): Promise<string> {
-    return await this.productSelect.element(by.css('option:checked')).getText();
   }
 
   async billSelectLastOption(): Promise<void> {
@@ -76,6 +60,22 @@ export class BillItemUpdatePage {
 
   async getBillSelectedOption(): Promise<string> {
     return await this.billSelect.element(by.css('option:checked')).getText();
+  }
+
+  async productSelectLastOption(): Promise<void> {
+    await this.productSelect.all(by.tagName('option')).last().click();
+  }
+
+  async productSelectOption(option: string): Promise<void> {
+    await this.productSelect.sendKeys(option);
+  }
+
+  getProductSelect(): ElementFinder {
+    return this.productSelect;
+  }
+
+  async getProductSelectedOption(): Promise<string> {
+    return await this.productSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

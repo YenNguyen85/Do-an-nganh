@@ -42,8 +42,8 @@ describe('BillItem e2e test', () => {
 
     await promise.all([
       billItemUpdatePage.setQuantityInput('5'),
-      billItemUpdatePage.productSelectLastOption(),
       billItemUpdatePage.billSelectLastOption(),
+      billItemUpdatePage.productSelectLastOption(),
     ]);
 
     expect(await billItemUpdatePage.getQuantityInput()).to.eq('5', 'Expected quantity value to be equals to 5');
