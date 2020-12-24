@@ -2,6 +2,8 @@ package io.yencute.web.rest;
 
 import io.yencute.domain.Bill;
 import io.yencute.repository.BillRepository;
+import io.yencute.service.BillService;
+import io.yencute.service.dto.BillDTO;
 import io.yencute.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -35,9 +37,11 @@ public class BillResource {
     private String applicationName;
 
     private final BillRepository billRepository;
+    private final BillService billService;
 
-    public BillResource(BillRepository billRepository) {
+    public BillResource(BillRepository billRepository, BillService billService) {
         this.billRepository = billRepository;
+        this.billService = billService;
     }
 
     /**
@@ -57,6 +61,12 @@ public class BillResource {
         return ResponseEntity.created(new URI("/api/bills/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/bills/save-bill")
+    public void checkout(@Valid @RequestBody BillDTO billDTO) throws URISyntaxException {
+        log.debug("REST request to save BillDTO : {}", billDTO);
+        billService.saveCheckout(billDTO);
     }
 
     /**
