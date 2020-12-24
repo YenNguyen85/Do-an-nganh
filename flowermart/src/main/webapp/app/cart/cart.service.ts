@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
+import { OrderStatus } from 'app/shared/model/enumerations/order-status.model';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { IBill } from 'app/shared/model/bill.model';
 import { IBillItem } from 'app/shared/model/bill-item.model';
 import { IProduct } from 'app/shared/model/product.model';
+import { IBillDTO } from 'app/shared/model/billDTO.model';
 
 type EntityResponseType = HttpResponse<IBill>;
 type EntityArrayResponseType = HttpResponse<IBillItem[]>;
@@ -27,8 +29,8 @@ export class CartService {
    * @param product
    * @returns billItem chứa product đó
    */
-  checkProductExists(product: IProduct): IBillItem | undefined {
-    return this.cart.find(item => item.product === product);
+  checkProductExists(product: IProduct): IBillItem | null {
+    return this.cart.find(item => item.product === product) || null;
   }
 
   /**
@@ -37,7 +39,7 @@ export class CartService {
    */
   addToCart(product: IProduct): void {
     const item = this.checkProductExists(product);
-    if (item === undefined) {
+    if (item === null) {
       window.alert(`Đã thêm sản phẩm ${product.name} vào giỏ hàng`);
       const billItem: IBillItem = { product, quantity: 1 };
       this.cart.push(billItem);
@@ -49,6 +51,17 @@ export class CartService {
     }
   }
 
+  /**
+   * Xóa một bill item khỏi cart
+   * @param item là item cần xóa khỏi giỏ hàng
+   */
+  deleteItem(item: IBillItem): void {
+    this.cart = this.cart.filter(value => value !== item);
+  }
+
+  /**
+   * trả về Observable của mảng billItem
+   */
   getCart(): Observable<IBillItem[]> {
     return of(this.cart);
   }
@@ -56,6 +69,14 @@ export class CartService {
   clearCart(): IBillItem[] {
     this.cart = [];
     return this.cart;
+  }
+
+  /**
+   * Chức năng thanh toán
+   */
+  saveBill(billItems: IBillItem[]): Observable<HttpResponse<IBillDTO>> {
+    const bill: IBillDTO = { placedDate: moment(), status: OrderStatus.PENDING, billItems };
+    return this.http.post<IBillDTO>(`${this.billUrl}/save-bill`, bill, { observe: 'response' });
   }
 
   // Gọi api hiển thị bill mới nhất và đang pending

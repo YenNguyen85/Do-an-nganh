@@ -80,7 +80,10 @@
     <div class="subtotal cf">
         <ul style="list-style-type:none">
             <li class="totalRow final"><span class="label">Total</span><span class="value">{{loadTotalPrice() | currency:"VND":"symbol"}}</span></li>
-            <li class="totalRow"><a href="#" class="btn continue">Checkout</a></li>
+            <li class="totalRow">
+                <button class="btn continue" (click)="checkout()">Checkout</button>
+            </li>
+            <!-- <li class="totalRow"><a href="#" class="btn continue" (click)="checkOut()">Checkout</a></li> -->
         </ul>
     </div>
 </div>
