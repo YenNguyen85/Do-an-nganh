@@ -41,36 +41,6 @@
         </ul>
     </div>
 
-    <!-- <div class="cart" *ngIf="bill !== undefined">
-
-        <button (click)="loadBillItem(bill)">update</button>
-
-        <ul class="cartWrap" *ngIf="billItems && billItems.length > 0">
-            <li class="items odd" *ngFor="let billItem of billItems">
-                <div class="infoWrap">
-                    <div class="cartSection">
-                        <img [src]="'data:' + billItem.product?.imageContentType + ';base64,' + billItem.product?.image" style="max-height: 30px;" alt="product image"/>
-
-                        <h3>{{billItem.product?.name}}</h3>
-
-                        <p> <input type="text" class="qty" [placeholder]="billItem.quantity" [(ngModel)]="billItem.quantity"/></p>
-
-                        <p class="stockStatus">{{billItem.status}}</p>
-                    </div>
-
-                    <div class="prodTotal cartSection">
-                        <p>{{billItem.product?.price |currency:"VND":"symbol"}}</p>
-                    </div>
-
-                    <div class="cartSection removeWrap">
-                        <a (click)="delete(billItem)" class="remove">x</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-    </div> -->
-
     <div class="promoCode">
         <label for="promo">Have A Promo Code?</label>
         <input type="text" name="promo" placholder="Enter Code" />
@@ -81,9 +51,8 @@
         <ul style="list-style-type:none">
             <li class="totalRow final"><span class="label">Total</span><span class="value">{{loadTotalPrice() | currency:"VND":"symbol"}}</span></li>
             <li class="totalRow">
-                <button class="btn continue" (click)="checkout()">Checkout</button>
+                <button class="btn btn-info" (click)="checkout()">Checkout</button>
             </li>
-            <!-- <li class="totalRow"><a href="#" class="btn continue" (click)="checkOut()">Checkout</a></li> -->
         </ul>
     </div>
 </div>

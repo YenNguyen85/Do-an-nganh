@@ -11,6 +11,7 @@ import { FlowermartEntityModule } from './entities/entity.module';
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import { BannerComponent } from './layouts/banner/banner.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
@@ -31,7 +32,16 @@ import { CartComponent } from './cart/cart.component';
     // embeded text editor module
     QuillModule.forRoot(),
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, CartComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+    BannerComponent,
+    CartComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class FlowermartAppModule {}
