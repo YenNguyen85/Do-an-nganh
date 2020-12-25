@@ -26,7 +26,7 @@
 
                         <p> <input type="text" class="qty" [(ngModel)]="item.quantity" [placeholder]="item.quantity"/></p>
 
-                        <p class="stockStatus">AVAILABLE</p>
+                        <p class="stockStatus">{{item.product?.status}}</p>
                     </div>
 
                     <div class="prodTotal cartSection">

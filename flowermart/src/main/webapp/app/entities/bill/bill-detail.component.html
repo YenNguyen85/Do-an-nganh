@@ -10,7 +10,7 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="flowermartApp.bill.placedDate">Placed Date</span></dt>
                 <dd>
-                    <span>{{ bill.placedDate }}</span>
+                    <span>{{ bill.placedDate | date:'short'}}</span>
                 </dd>
                 <dt><span jhiTranslate="flowermartApp.bill.status">Status</span></dt>
                 <dd>
@@ -33,6 +33,34 @@
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
+        </div>
+
+        <br><br>
+
+        <div class="alert alert-warning" id="no-result" *ngIf="billItems?.length === 0">
+            <span jhiTranslate="flowermartApp.billItem.home.notFound">No billItems found</span>
+        </div>
+    
+        <div class="table-responsive" id="entities" *ngIf="billItems && billItems.length > 0">
+            <table class="table table-striped" aria-describedby="page-heading">
+                <thead>
+                    <tr>
+                        <th scope="col" ><span jhiTranslate="flowermartApp.billItem.product">Product</span></th>
+                        <th scope="col" ><span jhiTranslate="flowermartApp.billItem.quantity">Quantity</span></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let billItem of billItems ;trackBy: trackId">
+                        <td>
+                            <div *ngIf="billItem.product">
+                                <a [routerLink]="['/product', billItem.product?.id, 'view']" >{{ billItem.product?.name }}</a>
+                            </div>
+                        </td>
+                        <td>{{ billItem.quantity }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

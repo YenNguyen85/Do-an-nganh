@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
 
 import { IBillItem } from 'app/shared/model/bill-item.model';
 
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CartService } from './cart.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { JhiEventManager } from 'ng-jhipster';
-import { IBillDTO } from 'app/shared/model/billDTO.model';
+import { CartDialogComponent } from './cart-dialog.component';
 
 @Component({
   selector: 'jhi-cart',
@@ -15,12 +15,11 @@ import { IBillDTO } from 'app/shared/model/billDTO.model';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  isSaving = false;
   billItems?: IBillItem[];
 
   eventSubscriber?: Subscription;
 
-  constructor(protected cartService: CartService, protected eventManager: JhiEventManager) {}
+  constructor(protected cartService: CartService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.loadAll();
@@ -48,12 +47,6 @@ export class CartComponent implements OnInit {
     this.loadAll();
   }
 
-  // pay(): void {
-  //   this.cartService.saveBill();
-  //   this.cartService.clearCart();
-  //   this.loadAll();
-  // }
-
   registerChangeInCategories(): void {
     this.eventSubscriber = this.eventManager.subscribe('cartModification', () => this.loadAll());
   }
@@ -63,27 +56,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-    this.isSaving = true;
-    if (this.billItems !== undefined && this.billItems !== []) {
-      this.subscribeToSaveResponse(this.cartService.saveBill(this.billItems));
-    }
-  }
-
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IBillDTO>>): void {
-    result.subscribe(
-      () => this.onSaveSuccess(),
-      () => this.onSaveError()
-    );
-  }
-
-  protected onSaveSuccess(): void {
-    this.isSaving = false;
-    window.alert('thanh toán thành công');
-    this.previousState();
-  }
-
-  protected onSaveError(): void {
-    this.isSaving = false;
-    window.alert('thanh toán thất bại');
+    const modalRef = this.modalService.open(CartDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.billItems = this.billItems;
   }
 }

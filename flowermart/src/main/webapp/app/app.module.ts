@@ -7,6 +7,7 @@ import { FlowermartCoreModule } from 'app/core/core.module';
 import { FlowermartAppRoutingModule } from './app-routing.module';
 import { FlowermartHomeModule } from './home/home.module';
 import { FlowermartEntityModule } from './entities/entity.module';
+import { FlowermartCartModule } from 'app/cart/cart.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -18,7 +19,6 @@ import { ErrorComponent } from './layouts/error/error.component';
 
 // embeded text editor
 import { QuillModule } from 'ngx-quill';
-import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { CartComponent } from './cart/cart.component';
     // jhipster-needle-angular-add-module JHipster will add new module here
     FlowermartEntityModule,
     FlowermartAppRoutingModule,
+    FlowermartCartModule,
     // embeded text editor module
     QuillModule.forRoot(),
   ],
@@ -40,7 +41,6 @@ import { CartComponent } from './cart/cart.component';
     ActiveMenuDirective,
     FooterComponent,
     BannerComponent,
-    CartComponent,
   ],
   bootstrap: [MainComponent],
 })

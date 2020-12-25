@@ -104,6 +104,12 @@ public class BillItemResource {
         return ResponseUtil.wrapOrNotFound(billItem);
     }
 
+    @GetMapping("/bill-items/in-bill/{id}")
+    public List<BillItem> getItemsInBill(@PathVariable Long id){
+        log.debug("REST request to get all bill item of bill {}", id);
+        return billItemRepository.findByBillId(id);
+    }
+
     /**
      * {@code DELETE  /bill-items/:id} : delete the "id" billItem.
      *
